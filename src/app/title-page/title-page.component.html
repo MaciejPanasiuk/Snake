@@ -1,0 +1,14 @@
+<h1>Snake Game Intro Page</h1>
+<form>
+    <div  class="form-group">
+        <label for ="playerName">Player Name</label>
+        <input required ngModel name="playerName" #playerName="ngModel" id="playerName" type="text" class="form-control form-control-sm" style="width: 400px;">
+        <div style="width: 400px;" class="alert alert-danger" *ngIf="!playerName.valid && playerName.touched">kinda need that first name</div>
+    </div>
+    <br>
+    <div  class="form-group">
+        <label for ="playerEmail">Email Adress</label>
+        <input ngModel name="email" type="email" id="playerEmail" type="text" class="form-control form-control-sm" style="width: 400px;"> 
+    </div>
+</form>
+<!-- ngModel name="playerName" #playerName="ngModel" -->
