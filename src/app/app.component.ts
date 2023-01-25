@@ -7,12 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Snake';
-  public swapToGame:boolean=true;
-  public swapComps() {
-    if (this.swapToGame) {
-      this.swapToGame=!this.swapToGame;
-    }
-  }
-  public isButtonVisible:boolean = true;
+public changecomps: boolean = true
+
+recieveStatus($event:any){
+  this.changecomps=$event;
+}
 }
 

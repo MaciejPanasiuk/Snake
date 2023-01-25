@@ -1,4 +1,2 @@
-<div *ngIf="this.swapToGame; then thenBlock else elseBlock"></div>
-<ng-template #thenBlock><app-title-page></app-title-page></ng-template>
-<ng-template #elseBlock><app-game-page></app-game-page></ng-template>
-<button class="btn btn-primary" *ngIf="this.isButtonVisible"(click)="swapComps()"  (click)="this.isButtonVisible = false">to game page</button>
+<app-title-page *ngIf="changecomps" (titleToGameEvent)="recieveStatus($event)"></app-title-page>
+<app-game-page *ngIf="!changecomps" (gameToTitleEvent)="recieveStatus($event)"></app-game-page>

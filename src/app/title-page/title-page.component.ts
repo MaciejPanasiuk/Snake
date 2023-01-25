@@ -6,8 +6,20 @@ import { Component,  EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./title-page.component.scss']
 })
 export class TitlePageComponent {
-  @Output() public formChange = new EventEmitter<string>();
+  @Output() public titleToGameEvent = new EventEmitter<boolean>();
   public playerName:string = ''
   public email:string = ''
-  public enableButton: boolean = false
+  public changecomps:boolean=true;
+  // public swapComps() {
+  //   if (this.changecomps) {
+  //     this.changecomps=!this.changecomps;
+  //   }
+  // }
+  // public isButtonVisible:boolean = true;
+  // public enableButton: boolean = false
+  constructor(){}
+  sendStatus(){
+    this.changecomps = !this.changecomps
+    this.titleToGameEvent.emit(this.changecomps)
+  }
 }
