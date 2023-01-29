@@ -7,19 +7,23 @@ import { Component,  EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class TitlePageComponent {
   @Output() public titleToGameEvent = new EventEmitter<boolean>();
-  public playerName:string = ''
-  public email:string = ''
+  @Output() public playerInfoEvent = new EventEmitter<Player>();
+  public Name:string = ''
+  public Email:string = ''
   public changecomps:boolean=true;
-  // public swapComps() {
-  //   if (this.changecomps) {
-  //     this.changecomps=!this.changecomps;
-  //   }
-  // }
-  // public isButtonVisible:boolean = true;
-  // public enableButton: boolean = false
   constructor(){}
   sendStatus(){
     this.changecomps = !this.changecomps
     this.titleToGameEvent.emit(this.changecomps)
   }
+  sendPlayerinfo(){
+    this.playerInfoEvent.emit({
+      Name: this.Name,
+      Email: this.Email
+    })
+  }
+}
+export interface Player {//domyślnie narazie tylko to co podajemy, potem dodamy jeszcze do objektu jako opcjonalne czas gry i high score
+  Name: string;
+  Email: string;
 }

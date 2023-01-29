@@ -1,16 +1,39 @@
 <h1>Snake Game Intro Page</h1>
-<form>
+<h5>Please type in your player info below</h5>
+<form #playerForm="ngForm">
     <div  class="form-group">
-        <label for ="playerName">Player Name</label>
-        <input required ngModel name="playerName" #playerName="ngModel" id="playerName" type="text" class="form-control form-control-sm" style="width: 400px;">
-        <div style="width: 400px;" class="alert alert-danger" *ngIf="!playerName.valid && playerName.touched">kinda need that first name</div>
+        <label for ="Name">Player Name</label>
+        <input id="name" 
+                name="name"
+                type="text"
+                #name="ngModel"
+                class="form-control form-control-sm" 
+                style="width: 400px;"
+                required [(ngModel)]="Name"
+                minlength="3"/>
+    <div style="width: 400px;" class="alert alert-danger" *ngIf="!name.valid && !name.pristine">Your name must be at least 3 characters long</div>          
     </div>
     <br>
     <div  class="form-group">
-        <label for ="playerEmail">Email Adress</label>
-        <input ngModel name="email" type="email" id="playerEmail" type="text" class="form-control form-control-sm" style="width: 400px;"> 
+        <label for ="Email">Email Adress</label>
+        <input id="email"
+                name="email"
+                type="email"
+                #email="ngModel"
+                class="form-control form-control-sm" 
+                style="width: 400px;"
+                required [(ngModel)]="Email"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
+    <div style="width: 400px;" class="alert alert-danger" *ngIf="!email.valid && email.errors && !email.pristine">Your email is invalid please type in a correct one like: Example@mail.com</div>
     </div>
-    <button class="btn btn-primary"(click)="sendStatus()">to game page</button>
+    <button [disabled]="playerForm.valid===false" class="btn btn-primary"(click)="sendStatus();sendPlayerinfo()">to game page</button>
 </form>
-<!-- ngModel name="playerName" #playerName="ngModel" -->
 
+ {{Name | json}}
+<br>
+<!-- {{player.name | json}} -->
+<p>Valid: {{playerForm.valid}}</p>
+<p>Pristine:  {{playerForm.pristine}}</p>
+<p>Touched:  {{playerForm.touched}}</p>
+<p>Dirty:  {{playerForm.dirty}}</p> -->
+    <!-- <div style="width: 400px;" class="alert alert-danger" *ngIf="!name.valid && name.touched">Please type in your player name</div> -->
