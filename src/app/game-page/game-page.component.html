@@ -1,14 +1,23 @@
 <head>some text</head>
 <h1>Welcome to our Snake Game {{playerInfo.Name}}!</h1>
-<ngx-snake #game></ngx-snake>
+<h2 *ngIf="isReady">Ready!</h2>
+<h2 *ngIf="isGo">Ongoing...</h2>
+<h2 *ngIf="isPaused">Stopped!</h2>
+<ngx-snake #game (foodEaten)="onFoodEaten()"></ngx-snake>
 <br>
-        <button (click)="game.actionStart()">Start</button>
-        <button (click)="game.actionStop()">Stop</button>
-        <button (click)="game.actionReset()">Reset</button>
+        <button (click)="game.actionStart();GameStarted()">Start</button>
+        <button (click)="game.actionStop();GamePaused()">Stop</button>
+        <button (click)="game.actionReset();GameReady()">Reset</button>
         <button (click)="game.actionUp()">Up</button>
         <button (click)="game.actionLeft()">Left</button>
         <button (click)="game.actionRight()">Right</button>
         <button (click)="game.actionDown()">Down</button>
         <br>
         <br>
+        <small>points {{pointCount}}</small>
  <button class="btn btn-primary"(click)="sendStatus()">exit to Title</button>
+ <br>
+ <br>
+ <br>
+ <br>
+ <small>{{playerData |json}}</small>

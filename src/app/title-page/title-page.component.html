@@ -9,7 +9,7 @@
                 #name="ngModel"
                 class="form-control form-control-sm" 
                 style="width: 400px;"
-                required [(ngModel)]="Name"
+                required [(ngModel)]="playerInfo.Name"
                 minlength="3"/>
     <div style="width: 400px;" class="alert alert-danger" *ngIf="!name.valid && !name.pristine">Your name must be at least 3 characters long</div>          
     </div>
@@ -22,17 +22,19 @@
                 #email="ngModel"
                 class="form-control form-control-sm" 
                 style="width: 400px;"
-                required [(ngModel)]="Email"
+                required [(ngModel)]="playerInfo.Email"
                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
     <div style="width: 400px;" class="alert alert-danger" *ngIf="!email.valid && email.errors && !email.pristine">Your email is invalid please type in a correct one like: Example@mail.com</div>
     </div>
     <button [disabled]="playerForm.valid===false" class="btn btn-primary"(click)="sendStatus();sendPlayerinfo()">to game page</button>
 </form>
-
- {{Name | json}}
-<br>
+<!-- <button (click)="add()">add</button> -->
+ <!-- {{playerData | json}}
+ <br>
+ {{playerInfo | json}}
+<br> -->
 <!-- {{player.name | json}} -->
-<p>Valid: {{playerForm.valid}}</p>
+<!-- <p>Valid: {{playerForm.valid}}</p>
 <p>Pristine:  {{playerForm.pristine}}</p>
 <p>Touched:  {{playerForm.touched}}</p>
 <p>Dirty:  {{playerForm.dirty}}</p> -->

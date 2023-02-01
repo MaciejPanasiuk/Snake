@@ -12,12 +12,15 @@ public playerInfo:Player={//zmienna pustego objektu ts z pobranym interfejsem
   Name: '',
   Email: ''
 }
+public playerData:Array<Player>=[]
 recieveStatus($event:any){
   this.changecomps=$event;
 }
 recievePlayerInfo($event:Player){//przypisujemy do obiektu nowe dane z title
-  this.playerInfo.Name=$event.Name;
-  this.playerInfo.Email=$event.Email;
+  this.playerInfo=$event
+}
+AddPlayerData($event:Player){
+  this.playerData.push($event)
 }
 }
 
