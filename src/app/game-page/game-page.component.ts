@@ -17,32 +17,62 @@ export class GamePageComponent {
   public isReady:boolean = true;
   public isGo:boolean = false;
   public isPaused:boolean = false;
-
+  public isGameOver:boolean = false;
+  public gameplayTime:number = 0;
+  public Interval:any;
   sendStatus(){
     this.gameToTitleEvent.emit(this.swapToTitle)
   }
   onFoodEaten(){
     this.pointCount=this.pointCount+1
   }
-  ClearPoints(){
-    this.pointCount=0
+  onGameOver(){
+    this.isGameOver=true;
+    this.isPaused=false;
+    this.isGo=false;
+    this.isReady=false;
+    this.stopTimer();
+
   }
+  // ClearPointsAndTimer(){
+  //   this.pointCount=0
+  // }
   GamePaused(){
+    this.isGameOver=false;
     this.isPaused=true;
     this.isGo=false;
     this.isReady=false;
+    this.stopTimer();
   }
   GameReady(){
-    this.isReady=true;
+    this.isGameOver=false;
     this.isPaused=false;
     this.isGo=false;
+    this.isReady=true;
+    this.pointCount=0
+    this.gameplayTime=0
   }
   GameStarted(){
-    this.isGo=true;
+    this.isGameOver=false;
     this.isPaused=false;
+    this.isGo=true;
     this.isReady=false;
+    this.startTimer();
   }
-
+  // GameLost(){
+  //   this.isGo=true;
+  //   this.isPaused=false;
+  //   this.isReady=false;
+  //   this.stopTimer();
+  // }
+  startTimer(){
+    this.Interval = setInterval(() => {
+      this.gameplayTime++;
+      }, 1000);
+  }
+  stopTimer(){
+    clearInterval(this.Interval);
+    }
   constructor(){
     this.playerInfo={
       Name: '',
