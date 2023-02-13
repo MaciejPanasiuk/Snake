@@ -37,4 +37,5 @@ export class TitlePageComponent {
 export interface Player {//domyślnie narazie tylko to co podajemy, potem dodamy jeszcze do objektu jako opcjonalne czas gry i high score
   Name: string;
   Email: string;
+  playerAction?: object
 }

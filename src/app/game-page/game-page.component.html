@@ -1,18 +1,18 @@
-<head>some text</head>
+<div class="Game">
 <h1>Welcome to our Snake Game {{playerInfo.Name}}!</h1>
 <h2 *ngIf="isReady">Game Ready!</h2>
 <h2 *ngIf="isGo">Game Ongoing...</h2>
 <h2 *ngIf="isPaused">Game Stopped!</h2>
-<h2 *ngIf="isGameOver">Game Over!</h2>
+<h2 *ngIf="isGameOver">Game Over! Reset to save Data!</h2>
 <ngx-snake #game (foodEaten)="onFoodEaten()"(gameOver)="onGameOver()"></ngx-snake>
 <br>
-        <button (click)="game.actionStart();GameStarted()">Start</button>
-        <button (click)="game.actionStop();GamePaused()">Stop</button>
-        <button (click)="game.actionReset();GameReady()">Reset</button>
-        <button (click)="game.actionUp()">Up</button>
-        <button (click)="game.actionLeft()">Left</button>
-        <button (click)="game.actionRight()">Right</button>
-        <button (click)="game.actionDown()">Down</button>
+        <button [disabled]="isGameOver"(click)="onStartButtonPressed()">Start</button>
+        <button [disabled]="isGameOver || isReady || isPaused"(click)="onStopButtonPressed()">Stop</button>
+        <button [disabled]="isReady"(click)="onResetButtonPressed()">Reset</button>
+        <button [disabled]="!isGo"(click)="onUpButtonPressed()">Up</button>
+        <button [disabled]="!isGo"(click)="onLeftButtonPressed()">Left</button>
+        <button [disabled]="!isGo"(click)="onRightButtonPressed()">Right</button>
+        <button [disabled]="!isGo"(click)="onDownButtonPressed()">Down</button>
         <br>
         <br>
  <button class="btn btn-primary"(click)="sendStatus()">exit to Title</button>
@@ -21,5 +21,32 @@
  <br>
  <br>
  <small>points: {{pointCount}}</small>
- <small>Time: {{gameplayTime}}</small>
+ <small>Time: {{gameplayTime}}s</small>
+</div>
+ <br>
+ <br>
+ <br>
+ <br>
+ <div>
+ <button *ngIf="!showStats" style="margin: auto" class="btn btn-primary" (click)="statsStatus()">Show Gameplay Data</button>
+ <button *ngIf="showStats" style="margin: auto" class="btn btn-primary" (click)="statsStatus()">Hide Gameplay Data</button>
+ <div *ngIf="showStats">
+        <label for ="Sorting">Sorting:</label>
+        <select id="Sorting" class="form-select form-select-lg mb-3" [(ngModel)]="howToSort">
+                <option value="ascending">ascending</option>
+                <option value="descending">descending</option>
+        </select>
+        <label for ="Sorting">Filtering:</label>
+        <select id="Filtering" class="form-select form-select-lg mb-3" [(ngModel)]="howToFilter">
+                <option value="show All">show All</option>
+                <option *ngFor="let item of allActionFilters" [value]="item">{{item}}</option>
+        </select>
+ <ol class="gamePlay">
+        <h6  style="text-align: start">Gameplay Data of {{savedCurrentGameData.playerName}}</h6>
+        <li *ngFor="let item of savedCurrentGameData.gamePlayHistory | filter:howToFilter | sort:howToSort ; let i = index">
+        {{ item.Action }} {{ item.Time }}s.
+        </li>
+</ol>
+</div>
+</div>
  <!-- <small>{{playerData |json}}</small> -->

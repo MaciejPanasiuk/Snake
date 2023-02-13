@@ -6,12 +6,16 @@ import { AppComponent } from './app.component';
 import { TitlePageComponent } from './title-page/title-page.component';
 import { GamePageComponent } from './game-page/game-page.component';
 import {FormsModule} from "@angular/forms";
+import { SortPipe } from './sort.pipe';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     TitlePageComponent,
-    GamePageComponent
+    GamePageComponent,
+    SortPipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

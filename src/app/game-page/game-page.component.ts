@@ -1,85 +1,165 @@
-import { Component,EventEmitter, OnInit, Output, Input, ViewChild,AfterViewInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { NgxSnakeComponent } from 'ngx-snake';
-import { Player } from 'c:/Frontend/Angular/Snake/src/app/title-page/title-page.component';
+import { Player } from '../title-page/title-page.component';
 
 @Component({
   selector: 'app-game-page',
   templateUrl: './game-page.component.html',
-  styleUrls: ['./game-page.component.scss']
+  styleUrls: ['./game-page.component.scss'],
 })
 export class GamePageComponent {
-  
-  @Input() playerInfo:Player;
-  @Input() playerData:Array<Player>;
+  @Input() playerInfo: Player;
+  @Input() playerData: Array<Player>;
   @Output() public gameToTitleEvent = new EventEmitter<boolean>();
-  public swapToTitle:boolean=true;
-  public pointCount:number=0
-  public isReady:boolean = true;
-  public isGo:boolean = false;
-  public isPaused:boolean = false;
-  public isGameOver:boolean = false;
-  public gameplayTime:number = 0;
-  public Interval:any;
-  sendStatus(){
-    this.gameToTitleEvent.emit(this.swapToTitle)
-  }
-  onFoodEaten(){
-    this.pointCount=this.pointCount+1
-  }
-  onGameOver(){
-    this.isGameOver=true;
-    this.isPaused=false;
-    this.isGo=false;
-    this.isReady=false;
-    this.stopTimer();
+  @ViewChild(NgxSnakeComponent)
+  private _snake!: NgxSnakeComponent;
+  public swapToTitle: boolean = true;
+  public isReady: boolean = true;
+  public isGo: boolean = false;
+  public isPaused: boolean = false;
+  public isGameOver: boolean = false;
+  public pointCount: number = 0;
+  public gameplayTime: number = 0;
+  public Interval: any;
+  public howToSort: string = ''
+  public showStats:boolean= false;
+  public allActionFilters: Array<string>=["action Start","action Stop","action Reset","action Up","action Left","action Right","action Down","Food Eaten","Game Over"];
+  public howToFilter:string='show All'
+  public gamePlayHistory:Array<playerAction> = [];
+  public savedCurrentGameData:TotalGameData={  
+    playerName:'',
+    pointsEarned: 0,
+    timePlayed: 0,
+    gamePlayHistory: [],
 
+  };
+  // public playerNameList:Array<string>=[];
+
+  public onStartButtonPressed() {
+    this._snake.actionStart();
+    this.PushCurrentData("action Start");
+    this.GameStarted();
   }
-  // ClearPointsAndTimer(){
-  //   this.pointCount=0
-  // }
-  GamePaused(){
-    this.isGameOver=false;
-    this.isPaused=true;
-    this.isGo=false;
-    this.isReady=false;
+  public onStopButtonPressed() {
+    this._snake.actionStop();
+    this.PushCurrentData("action Stop");
+    this.GamePaused();
+  }
+  public onResetButtonPressed() {
+    this._snake.actionReset();
+    this.PushCurrentData("action Reset");
+    this.saveCurrentGamePlay()
+    this.GameReady();
+  }
+  public onUpButtonPressed() {
+    this._snake.actionUp();
+    this.PushCurrentData("action Up");
+  }
+  public onLeftButtonPressed() {
+    this._snake.actionLeft();
+    this.PushCurrentData("action Left");
+  }
+  public onRightButtonPressed() {
+    this._snake.actionRight();
+    this.PushCurrentData("action Right");
+  }
+  public onDownButtonPressed() {
+    this._snake.actionDown();
+    this.PushCurrentData("action Down");
+  }
+  public PushCurrentData(message:string){
+    this.gamePlayHistory.push({
+      Time: this.gameplayTime,
+      Action: message
+    })
+  }
+  public saveCurrentGamePlay(){
+    this.savedCurrentGameData={
+      playerName: this.playerInfo.Name,
+      pointsEarned: this.pointCount,
+      timePlayed: this.gameplayTime,
+      gamePlayHistory: this.gamePlayHistory
+    };
+    // this.playerNameList.push(this.playerInfo.Name)
+    this.gamePlayHistory=[];
+  }
+  public sendStatus() {
+    this.gameToTitleEvent.emit(this.swapToTitle);
+  }
+  public onFoodEaten() {
+    this.pointCount = this.pointCount + 1;
+    this.PushCurrentData("Food Eaten");
+  }
+  public onGameOver() {
+    this.isGameOver = true;
+    this.isPaused = false;
+    this.isGo = false;
+    this.isReady = false;
+    this.stopTimer();
+    this.PushCurrentData("Game Over");
+  }
+  public GamePaused() {
+    this.isGameOver = false;
+    this.isPaused = true;
+    this.isGo = false;
+    this.isReady = false;
     this.stopTimer();
   }
-  GameReady(){
-    this.isGameOver=false;
-    this.isPaused=false;
-    this.isGo=false;
-    this.isReady=true;
-    this.pointCount=0
-    this.gameplayTime=0
+  public GameReady() {
+    this.isGameOver = false;
+    this.isPaused = false;
+    this.isGo = false;
+    this.isReady = true;
+    this.pointCount = 0;
+    this.gameplayTime = 0;
+    this.stopTimer();
   }
-  GameStarted(){
-    this.isGameOver=false;
-    this.isPaused=false;
-    this.isGo=true;
-    this.isReady=false;
+  public GameStarted() {
+    this.isGameOver = false;
+    this.isPaused = false;
+    this.isGo = true;
+    this.isReady = false;
     this.startTimer();
   }
-  // GameLost(){
-  //   this.isGo=true;
-  //   this.isPaused=false;
-  //   this.isReady=false;
-  //   this.stopTimer();
-  // }
-  startTimer(){
+  private startTimer() {
     this.Interval = setInterval(() => {
       this.gameplayTime++;
-      }, 1000);
+    }, 1000);
   }
-  stopTimer(){
+  private stopTimer() {
     clearInterval(this.Interval);
-    }
-  constructor(){
-    this.playerInfo={
+  }
+  // public sortAscending(){
+  //   this.howToSort='ascending'
+  // }
+  // public sortDescending(){
+  //   this.howToSort='descending'
+  // }
+  public statsStatus(){
+    this.showStats= !this.showStats;
+  }
+
+  constructor() {
+    this.playerInfo = {
       Name: '',
-      Email: ''
-    }
-    this.playerData=[]
+      Email: '',
+    };
+    this.playerData = [];
   }
 }
-
-
+export interface playerAction {
+  Time: number;
+  Action: string;
+}
+export interface TotalGameData {
+  playerName: string;
+  pointsEarned: number;
+  timePlayed: number;
+  gamePlayHistory: Array<playerAction>;
+}
