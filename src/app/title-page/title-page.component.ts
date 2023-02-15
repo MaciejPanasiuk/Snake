@@ -15,6 +15,7 @@ export class TitlePageComponent {
   }
   public playerData:Array<Player>=[]
   public changecomps:boolean=true;
+  public isInfoInvalid:boolean=false;
   constructor(){}
   sendStatus(){
     this.changecomps = !this.changecomps
@@ -25,6 +26,9 @@ export class TitlePageComponent {
       Name: this.playerInfo.Name,
       Email: this.playerInfo.Email
     })
+  }
+  showErrorMessages(){
+    this.isInfoInvalid=true;
   }
   // saveData(){
   //   this.playerData.push(this.playerInfo)

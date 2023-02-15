@@ -1,41 +1,38 @@
-<h1>Snake Game Intro Page</h1>
+<div class="titlePage">
+<h1 style="text-align: center;">Snake Game Intro Page</h1>
 <h5>Please type in your player info below</h5>
+<br/>
 <form #playerForm="ngForm">
-    <div  class="form-group">
+    <div class="form-group">
         <label for ="Name">Player Name</label>
-        <input id="name" 
+        <input id="Name" 
                 name="name"
                 type="text"
                 #name="ngModel"
-                class="form-control form-control-sm" 
-                style="width: 400px;"
+                class="form-control form-control-sm"
                 required [(ngModel)]="playerInfo.Name"
                 minlength="3"/>
-    <div style="width: 400px;" class="alert alert-danger" *ngIf="!name.valid && !name.pristine">Your name must be at least 3 characters long</div>          
-    </div>
-    <br>
-    <div  class="form-group">
+    <div class="alert alert-danger" *ngIf="!name.valid && isInfoInvalid">Your name must be at least 3 characters long</div><br/><br/>   
+    <!-- <span style="width: 550px;height: 30px;" class="alert alert-danger" *ngIf="!name.valid && !name.pristine">Your name must be at least 3 characters long</span><br/>            -->
+       
+</div>
+    <div class="form-group">
         <label for ="Email">Email Adress</label>
-        <input id="email"
+        <input id="Email"
                 name="email"
                 type="email"
                 #email="ngModel"
-                class="form-control form-control-sm" 
-                style="width: 400px;"
+                class="form-control form-control-sm " 
                 required [(ngModel)]="playerInfo.Email"
                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
-    <div style="width: 400px;" class="alert alert-danger" *ngIf="!email.valid && email.errors && !email.pristine">Your email is invalid please type in a correct one like: Example@mail.com</div>
+    <div class="alert alert-danger" *ngIf="!email.valid && email.errors && isInfoInvalid">Your email is invalid please type in a correct one like: Example@mail.com</div><br/> <br/>
+    <!-- <span style="width: 550px;height: 60px;" class="alert alert-danger" *ngIf="!email.valid && email.errors && !email.pristine">Your email is invalid <br/>please type in a correct one like: Example@mail.com</span><br/> <br/> -->
     </div>
-    <button [disabled]="playerForm.valid===false" class="btn btn-primary"(click)="sendStatus();sendPlayerinfo()">to game page</button>
+    <!-- <button [disabled]="!playerForm.valid" class="btn btn-primary btn-lg"(click)="sendStatus();sendPlayerinfo()">Start Game</button><br/> -->
+    <div class="fixed-bottom">
+    <div *ngIf="playerForm.valid; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock><button class="btn btn-primary btn-lg"(click)="sendStatus();sendPlayerinfo()">Start Game</button><br/></ng-template>
+<ng-template #elseBlock><button class="btn btn-primary btn-lg"(click)="showErrorMessages()">Start Game</button><br/></ng-template>
+</div>
 </form>
-<!-- <button (click)="add()">add</button> -->
- <!-- {{playerData | json}}
- <br>
- {{playerInfo | json}}
-<br> -->
-<!-- {{player.name | json}} -->
-<!-- <p>Valid: {{playerForm.valid}}</p>
-<p>Pristine:  {{playerForm.pristine}}</p>
-<p>Touched:  {{playerForm.touched}}</p>
-<p>Dirty:  {{playerForm.dirty}}</p> -->
-    <!-- <div style="width: 400px;" class="alert alert-danger" *ngIf="!name.valid && name.touched">Please type in your player name</div> -->
+</div>

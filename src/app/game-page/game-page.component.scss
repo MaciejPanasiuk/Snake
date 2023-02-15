@@ -3,33 +3,6 @@
     display: inline-block;
     width: auto;
     text-align: center;
-
-    button {
-        &.bw {
-            color: black;
-            background: white;
-            border: 2px solid black;
-        }
-        &.colors {
-            color: black;
-            background: yellow;
-            border: 2px solid red;
-            span {
-                font-weight: bold;
-                background: white;
-                color: black;
-                padding: 0 2px;
-                &.green {
-                    background: green;
-                    color: white;
-                }
-                &.red {
-                    background: red;
-
-                }
-            }
-        }
-    }
 }
 
 .controls {
@@ -52,19 +25,41 @@ small{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background-image: url("../formbg.jpg");
+    border: 3px solid rgb(175, 170, 170);
+    border-radius: 25px;
+    
+    // display: inline-block;
+}
+.right-container{
+    position:absolute;
+    right:150px;
+    top:50px;
+    // display: inline-block;
 }
 .li{
     text-align: left;
+}
+.stats-container{
+    background-image: url("../formgb3.jpg");
+    border: 3px solid rgb(175, 170, 170);
+    border-radius: 25px
 }
 .gamePlay{
     overflow: auto;
     height: 500px;
     width: 300px;
-    background-color: rgb(23, 121, 23);
+    // background-color: rgb(23, 121, 23);
     text-align: start;
-    border-radius: 5px solid black;
 
 }
 .StatsContainer{
     width: 300px;
+}
+.button-container{
+    width: 300px;
+}
+h1{
+    padding-left: 50px;
+    padding-right: 50px;
 }
