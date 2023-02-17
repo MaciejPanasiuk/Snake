@@ -12,7 +12,8 @@
                 class="form-control form-control-sm"
                 required [(ngModel)]="playerInfo.Name"
                 minlength="3"/>
-    <div class="alert alert-danger" *ngIf="!name.valid && isInfoInvalid">Your name must be at least 3 characters long</div><br/><br/>   
+                <!-- <div class="alert alert-danger" *ngIf="!name.valid && isInfoInvalid">Your name must be at least 3 characters long</div><br/><br/> -->
+    <div class="alert alert-danger" [ngStyle]="{'visibility':!name.valid && isInfoInvalid ? 'visible' : 'hidden'}">Your name must be at least 3 characters long</div><br/>   
     <!-- <span style="width: 550px;height: 30px;" class="alert alert-danger" *ngIf="!name.valid && !name.pristine">Your name must be at least 3 characters long</span><br/>            -->
        
 </div>
@@ -25,7 +26,8 @@
                 class="form-control form-control-sm " 
                 required [(ngModel)]="playerInfo.Email"
                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
-    <div class="alert alert-danger" *ngIf="!email.valid && email.errors && isInfoInvalid">Your email is invalid please type in a correct one like: Example@mail.com</div><br/> <br/>
+                <!-- <div class="alert alert-danger" *ngIf="!email.valid && email.errors && isInfoInvalid">Your email is invalid please type in a correct one like: Example@mail.com</div><br/> <br/> -->
+    <div class="alert alert-danger" [ngStyle]="{'visibility':!email.valid && isInfoInvalid? 'visible' : 'hidden'}">Your email is invalid please type in a correct one like: Example@mail.com</div><br/>
     <!-- <span style="width: 550px;height: 60px;" class="alert alert-danger" *ngIf="!email.valid && email.errors && !email.pristine">Your email is invalid <br/>please type in a correct one like: Example@mail.com</span><br/> <br/> -->
     </div>
     <!-- <button [disabled]="!playerForm.valid" class="btn btn-primary btn-lg"(click)="sendStatus();sendPlayerinfo()">Start Game</button><br/> -->
@@ -36,3 +38,6 @@
 </div>
 </form>
 </div>
+<!-- zrobić hiden na alerty i wprowadzić jakiegos bootstrapa na selectory paramentrów gry! -->
+
+

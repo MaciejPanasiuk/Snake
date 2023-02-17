@@ -3,11 +3,11 @@
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-image: url("../formbg.jpg");
+    background-image: url("../snek.jpg");
     border: 3px solid rgb(175, 170, 170);
     border-radius: 25px;
     width:600px;
-    height:450px;
+    height:400px;
 }
 h1,h5,label{
     text-align: center;
@@ -21,7 +21,7 @@ label{
     line-height:30px;
     padding:0px 15px;
     text-align: center;
-    display:block;
+    // display:block;
     width:100%;
 
 }
