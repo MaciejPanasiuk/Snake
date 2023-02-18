@@ -89,24 +89,30 @@
     </button>
   </div>
 </div>
-<span class="right-container" >
-  <div class="button-container" >
-    <button *ngIf="!showStats" class="btn btn-primary btn-lg" (click)="statsStatus()">
+<span class="right-container">
+  <div class="button-container">
+    <button
+      *ngIf="!showStats"
+      class="btn btn-primary btn-lg"
+      (click)="statsStatus()"
+    >
       Show Gameplay Data
     </button>
-    <button *ngIf="showStats" class="btn btn-primary btn-lg" (click)="statsStatus()">
+    <button
+      *ngIf="showStats"
+      class="btn btn-primary btn-lg"
+      (click)="statsStatus()"
+    >
       Hide Gameplay Data
     </button>
   </div>
   <br />
   <div class="stats-container" *ngIf="showStats">
-    <h6 style="text-align: center">
-      Last game-basic info:
-    </h6>
+    <h6 style="text-align: center">Last game-basic info:</h6>
     <div style="text-align: start">
-      Player Name: {{savedCurrentGameData.playerName}}<br/>
-      Points Earned: {{savedCurrentGameData.pointsEarned}}<br/>
-      Time Played: {{savedCurrentGameData.timePlayed}}s
+      Player Name: {{ savedCurrentGameData.playerName }}<br />
+      Points Earned: {{ savedCurrentGameData.pointsEarned }}<br />
+      Time Played: {{ savedCurrentGameData.timePlayed }}s
     </div>
     <div>
       <label for="Sorting">Sorting:</label>
@@ -134,11 +140,8 @@
     </div>
     <div *ngIf="savedCurrentGameData.gamePlayHistory.length !== 0">
       <ol class="gamePlay">
-
-        <hr/>
-        <h6 style="text-align: center">
-          Gameplay history:
-        </h6>
+        <hr />
+        <h6 style="text-align: center">Gameplay history:</h6>
         <li
           *ngFor="
             let item of savedCurrentGameData.gamePlayHistory
@@ -162,4 +165,3 @@
     <br />
   </div>
 </span>
-<!-- <small>{{playerData |json}}</small> -->

@@ -28,8 +28,6 @@ small{
     background-image: url("../formbg.jpg");
     border: 3px solid rgb(175, 170, 170);
     border-radius: 25px;
-    
-    // display: inline-block;
 }
 .right-container{
     position:absolute;
@@ -47,7 +45,7 @@ small{
 }
 .gamePlay{
     overflow: auto;
-    height: 500px;
+    height: 480px;
     width: 300px;
     // background-color: rgb(23, 121, 23);
     text-align: start;

@@ -1,15 +1,18 @@
-<!-- {{email}}{{playerName}} -->
-
 <body>
-<!-- {{changecomps}} -->
-<!-- {{playerInfo | json}} -->
-<app-title-page *ngIf="changecomps" 
-(titleToGameEvent)="recieveStatus($event)"
-(playerInfoEvent)="recievePlayerInfo($event)"
-(playerInfoEvent)="AddPlayerData($event)">
-</app-title-page>
-<app-game-page *ngIf="!changecomps" (gameToTitleEvent)="recieveStatus($event)"[playerInfo]="playerInfo"[playerData]="playerData"></app-game-page>
-<!-- (playerInfoEvent)="recievePlayerInfo($event) -->
-<!-- <small>{{playerData |json}}</small> -->
+  <!-- {{changecomps}} -->
+  <!-- {{playerInfo | json}} -->
+  <app-title-page
+    *ngIf="changeComps"
+    (titleToGameEvent)="recieveStatus($event)"
+    (playerInfoEvent)="recievePlayerInfo($event)"
+    (playerInfoEvent)="AddPlayerData($event)"
+  >
+  </app-title-page>
+  <app-game-page
+    *ngIf="!changeComps"
+    (gameToTitleEvent)="recieveStatus($event)"
+    [playerInfo]="playerInfo"
+    [playerData]="playerData"
+  ></app-game-page>
+  <!-- (playerInfoEvent)="recievePlayerInfo($event) -->
 </body>
-<small>baba</small>

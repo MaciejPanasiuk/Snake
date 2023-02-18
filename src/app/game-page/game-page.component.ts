@@ -27,74 +27,80 @@ export class GamePageComponent {
   public pointCount: number = 0;
   public gameplayTime: number = 0;
   public Interval: any;
-  public howToSort: string = ''
-  public showStats:boolean= false;
-  public allActionFilters: Array<string>=["action Start","action Stop","action Reset","action Up","action Left","action Right","action Down","Food Eaten","Game Over"];
-  public howToFilter:string='show All'
-  public gamePlayHistory:Array<playerAction> = [];
-  public savedCurrentGameData:TotalGameData={  
-    playerName:'',
+  public howToSort: string = '';
+  public showStats: boolean = false;
+  public allActionFilters: Array<string> = [
+    'action Start',
+    'action Stop',
+    'action Reset',
+    'action Up',
+    'action Left',
+    'action Right',
+    'action Down',
+    'Food Eaten',
+    'Game Over',
+  ];
+  public howToFilter: string = 'show All';
+  public gamePlayHistory: Array<playerAction> = [];
+  public savedCurrentGameData: TotalGameData = {
+    playerName: '',
     pointsEarned: 0,
     timePlayed: 0,
     gamePlayHistory: [],
-
   };
-  // public playerNameList:Array<string>=[];
-
   public onStartButtonPressed() {
     this._snake.actionStart();
-    this.PushCurrentData("action Start");
+    this.PushCurrentData('action Start');
     this.GameStarted();
   }
   public onStopButtonPressed() {
     this._snake.actionStop();
-    this.PushCurrentData("action Stop");
+    this.PushCurrentData('action Stop');
     this.GamePaused();
   }
   public onResetButtonPressed() {
     this._snake.actionReset();
-    this.PushCurrentData("action Reset");
-    this.saveCurrentGamePlay()
+    this.PushCurrentData('action Reset');
+    this.saveCurrentGamePlay();
     this.GameReady();
   }
   public onUpButtonPressed() {
     this._snake.actionUp();
-    this.PushCurrentData("action Up");
+    this.PushCurrentData('action Up');
   }
   public onLeftButtonPressed() {
     this._snake.actionLeft();
-    this.PushCurrentData("action Left");
+    this.PushCurrentData('action Left');
   }
   public onRightButtonPressed() {
     this._snake.actionRight();
-    this.PushCurrentData("action Right");
+    this.PushCurrentData('action Right');
   }
   public onDownButtonPressed() {
     this._snake.actionDown();
-    this.PushCurrentData("action Down");
+    this.PushCurrentData('action Down');
   }
-  public PushCurrentData(message:string){
+  public PushCurrentData(message: string) {
     this.gamePlayHistory.push({
       Time: this.gameplayTime,
-      Action: message
-    })
+      Action: message,
+    });
   }
-  public saveCurrentGamePlay(){
-    this.savedCurrentGameData={
+  public saveCurrentGamePlay() {
+    this.savedCurrentGameData = {
       playerName: this.playerInfo.Name,
       pointsEarned: this.pointCount,
       timePlayed: this.gameplayTime,
-      gamePlayHistory: this.gamePlayHistory
+      gamePlayHistory: this.gamePlayHistory,
     };
-    // this.playerNameList.push(this.playerInfo.Name)
-    this.gamePlayHistory=[];
+    this.gamePlayHistory = [];
   }
   public sendStatus() {
     this.gameToTitleEvent.emit(this.swapToTitle);
   }
   public onFoodEaten() {
     this.pointCount = this.pointCount + 1;
-    this.PushCurrentData("Food Eaten");
+    this.PushCurrentData('Food Eaten');
   }
   public onGameOver() {
     this.isGameOver = true;
@@ -102,7 +108,7 @@ export class GamePageComponent {
     this.isGo = false;
     this.isReady = false;
     this.stopTimer();
-    this.PushCurrentData("Game Over");
+    this.PushCurrentData('Game Over');
   }
   public GamePaused() {
     this.isGameOver = false;
@@ -135,14 +141,8 @@ export class GamePageComponent {
   private stopTimer() {
     clearInterval(this.Interval);
   }
-  // public sortAscending(){
-  //   this.howToSort='ascending'
-  // }
-  // public sortDescending(){
-  //   this.howToSort='descending'
-  // }
-  public statsStatus(){
-    this.showStats= !this.showStats;
+  public statsStatus() {
+    this.showStats = !this.showStats;
   }
 
   constructor() {
