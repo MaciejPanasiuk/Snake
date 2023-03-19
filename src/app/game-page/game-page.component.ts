@@ -6,7 +6,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgxSnakeComponent } from 'ngx-snake';
-import { Player } from '../title-page/title-page.component';
+import { Player, PlayerDataService } from '../player-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-page',
@@ -14,16 +15,28 @@ import { Player } from '../title-page/title-page.component';
   styleUrls: ['./game-page.component.scss'],
 })
 export class GamePageComponent {
-  @Input() playerInfo: Player;
-  @Input() playerData: Array<Player>;
-  @Output() public gameToTitleEvent = new EventEmitter<boolean>();
+  // @Input() playerInfo: Player;
+  // @Input() playerData: Array<Player>;
+  // @Output() public gameToTitleEvent = new EventEmitter<boolean>();
   @ViewChild(NgxSnakeComponent)
   private _snake!: NgxSnakeComponent;
-  public swapToTitle: boolean = true;
+  // public swapToTitle: boolean = true;
   public isReady: boolean = true;
   public isGo: boolean = false;
   public isPaused: boolean = false;
   public isGameOver: boolean = false;
+  public playerInfo:Player = {
+    Name: '',
+    Email: '',}
+  constructor(private _router: Router,
+    public _playerData: PlayerDataService) {
+    // this.playerData = [];
+    this.DataSubmitCheck()
+    // this.playerInfo = this._playerData.readData ();
+  }
+  ngOnInit(): void {
+    this.playerInfo = this._playerData.readData ();
+  }
   public pointCount: number = 0;
   public gameplayTime: number = 0;
   public Interval: any;
@@ -48,6 +61,15 @@ export class GamePageComponent {
     timePlayed: 0,
     gamePlayHistory: [],
   };
+    public backToTitle() {
+    this._router.navigate(['/TitlePage']);}
+    public DataSubmitCheck() {
+      if (this._playerData.PlayerInfoSubmited () === false) {
+        this._router.navigate(['/TitlePage'])
+      }
+    }
+  
+
   public onStartButtonPressed() {
     this._snake.actionStart();
     this.PushCurrentData('action Start');
@@ -95,9 +117,9 @@ export class GamePageComponent {
     };
     this.gamePlayHistory = [];
   }
-  public sendStatus() {
-    this.gameToTitleEvent.emit(this.swapToTitle);
-  }
+  // public sendStatus() {
+  //   this.gameToTitleEvent.emit(this.swapToTitle);
+  // }
   public onFoodEaten() {
     this.pointCount = this.pointCount + 1;
     this.PushCurrentData('Food Eaten');
@@ -143,14 +165,6 @@ export class GamePageComponent {
   }
   public statsStatus() {
     this.showStats = !this.showStats;
-  }
-
-  constructor() {
-    this.playerInfo = {
-      Name: '',
-      Email: '',
-    };
-    this.playerData = [];
   }
 }
 export interface playerAction {

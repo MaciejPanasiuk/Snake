@@ -1,3 +1,4 @@
+<!-- {{_playerData| json}} -->
 <div class="titlePage">
 <h1 style="text-align: center;">Snake Game Intro Page</h1>
 <h5>Please type in your player info below</h5>
@@ -31,10 +32,11 @@
     <!-- <button [disabled]="!playerForm.valid" class="btn btn-primary btn-lg"(click)="sendStatus();sendPlayerinfo()">Start Game</button><br/> -->
     <div class="fixed-bottom">
     <div *ngIf="playerForm.valid; then thenBlock else elseBlock"></div>
-<ng-template #thenBlock><button class="btn btn-primary btn-lg"(click)="sendStatus();sendPlayerinfo()">Start Game</button><br/></ng-template>
+<ng-template #thenBlock><button class="btn btn-primary btn-lg"(click)="moveToGame()">Start Game</button><br/></ng-template>
 <ng-template #elseBlock><button class="btn btn-primary btn-lg"(click)="showErrorMessages()">Start Game</button><br/></ng-template>
 </div>
 </form>
 </div>
+
 
 

@@ -1,27 +1,24 @@
 import { Component } from '@angular/core';
-import { Player } from './title-page/title-page.component'; // musi pobrać interfejs z childa by odpowiednio odebrac dane
+import { Router } from '@angular/router';
+import { Player, PlayerDataService } from './player-data.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  constructor(private _router: Router,
+    private _playerData:PlayerDataService) { }
   title = 'Snake';
-  public changeComps: boolean = true;
   public playerInfo: Player = {
     //zmienna pustego objektu ts z pobranym interfejsem
     Name: '',
     Email: '',
   };
-  public playerData: Array<Player> = [];
-  recieveStatus($event: any) {
-    this.changeComps = $event;
-  }
-  recievePlayerInfo($event: Player) {
-    //przypisujemy do obiektu nowe dane z title
-    this.playerInfo = $event;
-  }
-  AddPlayerData($event: Player) {
-    this.playerData.push($event);
-  }
+  // public playerData: Array<Player> = [];
+  // recievePlayerInfo($event: Player) {
+  //   //przypisujemy do obiektu nowe dane z title
+  //   this.playerInfo = $event;
+  // }
 }
