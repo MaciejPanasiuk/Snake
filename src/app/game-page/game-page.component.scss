@@ -13,16 +13,9 @@
 ngx-snake {
     display: inline-block;
 }
-small{
-    font-size: large;   
-    border: 10px solid rgb(32, 94, 30);
-    padding: 15px;
-    color:rgb(236, 151, 39);
-    background-color:rgb(0, 0, 0);
-}
 .Game{
     position: absolute;
-    top: 60%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-image: url("../formbg.jpg");
@@ -34,28 +27,6 @@ small{
     right:50px;
     top:50px;
     // display: inline-block;
-}
-.li{
-    text-align: left;
-}
-.stats-container{
-    background-image: url("../formgb3.jpg");
-    border: 3px solid rgb(175, 170, 170);
-    border-radius: 25px
-}
-.gamePlay{
-    overflow: auto;
-    height: 480px;
-    width: 300px;
-    // background-color: rgb(23, 121, 23);
-    text-align: start;
-
-}
-.StatsContainer{
-    width: 300px;
-}
-.button-container{
-    width: 300px;
 }
 h1{
     padding-left: 50px;

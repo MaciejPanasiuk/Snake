@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { playerAction } from './game-page/game-page.component';
+import { playerAction } from './definitions';
 
 @Pipe({
   name: 'filter',

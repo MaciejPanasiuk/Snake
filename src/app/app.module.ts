@@ -10,6 +10,9 @@ import { SortPipe } from './sort.pipe';
 import { FilterPipe } from './filter.pipe';
 import { RouterModule } from '@angular/router';
 import { PlayerFormComponent } from './title-page/player-form/player-form.component';
+import { GameInfoComponent } from './game-page/game-info/game-info.component';
+import { ControllerComponent } from './game-page/controller/controller.component';
+import { GameStatusComponent } from './game-page/game-status/game-status.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { PlayerFormComponent } from './title-page/player-form/player-form.compon
     SortPipe,
     FilterPipe,
     PlayerFormComponent,
+    GameInfoComponent,
+    ControllerComponent,
+    GameStatusComponent,
     
   ],
   imports: [

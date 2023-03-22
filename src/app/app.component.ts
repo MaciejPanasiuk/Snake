@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Player, PlayerDataService } from './player-data.service';
+import { PlayerDataService } from './player-data.service';
+import { Player } from './definitions';
 
 @Component({
   selector: 'app-root',

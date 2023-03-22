@@ -1,41 +1,8 @@
-<!-- {{_playerData| json}} -->
 <div class="titlePage">
 <h1 style="text-align: center;">Snake Game Intro Page</h1>
 <h5>Please type in your player info below</h5>
 <br/>
-<form #playerForm="ngForm">
-    <div class="form-group">
-        <label for ="Name">Player Name</label>
-        <input id="Name" 
-                name="name"
-                type="text"
-                #name="ngModel"
-                class="form-control form-control-sm"
-                required [(ngModel)]="playerInfo.Name"
-                minlength="3"/>
-    <div class="alert alert-danger" [ngStyle]="{'visibility':!name.valid && isInfoInvalid ? 'visible' : 'hidden'}">Your name must be at least 3 characters long</div><br/>   
-    <!-- <span style="width: 550px;height: 30px;" class="alert alert-danger" *ngIf="!name.valid && !name.pristine">Your name must be at least 3 characters long</span><br/>            -->
-       
-</div>
-    <div class="form-group">
-        <label for ="Email">Email Adress</label>
-        <input id="Email"
-                name="email"
-                type="email"
-                #email="ngModel"
-                class="form-control form-control-sm " 
-                required [(ngModel)]="playerInfo.Email"
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
-    <div class="alert alert-danger" [ngStyle]="{'visibility':!email.valid && isInfoInvalid? 'visible' : 'hidden'}">Your email is invalid please type in a correct one like: example@mail.com</div><br/>
-    <!-- <span style="width: 550px;height: 60px;" class="alert alert-danger" *ngIf="!email.valid && email.errors && !email.pristine">Your email is invalid <br/>please type in a correct one like: Example@mail.com</span><br/> <br/> -->
-    </div>
-    <!-- <button [disabled]="!playerForm.valid" class="btn btn-primary btn-lg"(click)="sendStatus();sendPlayerinfo()">Start Game</button><br/> -->
-    <div class="fixed-bottom">
-    <div *ngIf="playerForm.valid; then thenBlock else elseBlock"></div>
-<ng-template #thenBlock><button class="btn btn-primary btn-lg"(click)="moveToGame()">Start Game</button><br/></ng-template>
-<ng-template #elseBlock><button class="btn btn-primary btn-lg"(click)="showErrorMessages()">Start Game</button><br/></ng-template>
-</div>
-</form>
+<app-player-form></app-player-form>
 </div>
 
 

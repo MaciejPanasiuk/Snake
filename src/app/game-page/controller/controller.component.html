@@ -1,0 +1,64 @@
+
+<div class="container">
+    <div class="row justify-content-md-center d-md-block gx-5">
+      <button
+        class="col-2 btn btn-dark btn-sm"
+        [disabled]="GameStatus.isGameOver"
+        (click)="onStartButtonPressed()"
+      >
+        Start
+      </button>
+      <button
+        class="col-2 btn btn-dark btn-sm"
+        [disabled]="GameStatus.isGameOver || GameStatus.isReady || GameStatus.isPaused"
+        (click)="onStopButtonPressed()"
+      >
+        Stop
+      </button>
+      <button
+        class="col-2 btn btn-dark btn-sm"
+        [disabled]="GameStatus.isReady"
+        (click)="onResetButtonPressed()"
+      >
+        Reset
+      </button>
+    </div>
+    <br />
+    <div class="d-grid gap-2 gx-2">
+      <div class="row justify-content-md-center d-md-block">
+        <button
+          class="col-2 btn btn-dark btn-lg"
+          [disabled]="!GameStatus.isGo"
+          (click)="onUpButtonPressed()"
+        >
+          Up
+        </button>
+      </div>
+      <div class="row justify-content-md-center d-md-block">
+        <button
+          class="col-2 btn btn-dark btn-lg"
+          [disabled]="!GameStatus.isGo"
+          (click)="onLeftButtonPressed()"
+        >
+          Left
+        </button>
+        <button
+          class="col-2 btn btn-dark btn-lg"
+          [disabled]="!GameStatus.isGo"
+          (click)="onRightButtonPressed()"
+        >
+          Right
+        </button>
+      </div>
+      <div class="row justify-content-md-center d-md-block">
+        <button
+          class="col-2 btn btn-dark btn-lg"
+          [disabled]="!GameStatus.isGo"
+          (click)="onDownButtonPressed()"
+        >
+          Down
+        </button>
+      </div>
+    </div>
+    <br />
+  </div>

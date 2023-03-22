@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Player } from './definitions';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,4 @@ PlayerInfoSubmited () {
   return this._isDataVerified;
 }
   constructor() { }
-}
-export interface Player {
-  Name: string;
-  Email: string;
-  playerAction?: object;
 }
