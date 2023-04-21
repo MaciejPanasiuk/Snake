@@ -1,6 +1,6 @@
 export interface Player {
-    Name: string;
-    Email: string;
+    name: string;
+    auth_token: string;
     playerAction?: object;
   }
 export interface playerAction {
@@ -18,4 +18,15 @@ export interface TotalGameData {
     isPaused: boolean;
     isGo: boolean;
     isReady: boolean;
+  }
+  export interface Authentication{
+    "auth-token": string;
+  }
+  export interface Scores{
+    'name':string;
+    'game'?:string;
+    'score':number
+  }
+  export interface AuthRes{
+    success:boolean
   }

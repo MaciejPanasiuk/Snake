@@ -1,9 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgxSnakeComponent } from 'ngx-snake';
 import { PlayerDataService } from '../player-data.service';
-import { Player, TotalGameData, GameStatus,playerAction } from '../definitions';
+import {
+  Player,
+  TotalGameData,
+  GameStatus,
+  playerAction,
+  Scores,
+} from '../definitions';
 import { Router } from '@angular/router';
 import { ControllerComponent } from './controller/controller.component';
+import { GamesServerService } from '../games-server.service';
 
 @Component({
   selector: 'app-game-page',
@@ -21,23 +28,34 @@ export class GamePageComponent {
     isGameOver: false,
   };
   public playerInfo: Player = {
-    Name: '',
-    Email: '',
+    name: '',
+    auth_token: '',
   };
   public CurrentGameData: TotalGameData = {
     playerName: '',
-    // playerName: this.playerInfo.Name,
     pointsEarned: 0,
     timePlayed: 0,
     gamePlayHistory: [],
   };
+  public highScores: Array<Scores> = [];
   public Interval: any;
-  constructor(private _router: Router, public _playerData: PlayerDataService) {
+  public IntervalId: any;
+  constructor(
+    private _router: Router,
+    private _playerData: PlayerDataService,
+    private _highScores: GamesServerService
+  ) {
     this.DataSubmitCheck();
+    this.loadScoresData();
   }
   ngOnInit(): void {
+    this.highScores = this._highScores.highScores;
     this.playerInfo = this._playerData.readData();
-    this.CurrentGameData.playerName = this.playerInfo.Name;
+    this.CurrentGameData.playerName = this.playerInfo.name;
+    this.IntervalId == setInterval(() => this.loadScoresData(), 30000);
+  }
+  ngOnDestroy() {
+    clearInterval(this.IntervalId);
   }
   public backToTitle() {
     this._router.navigate(['/TitlePage']);
@@ -47,7 +65,36 @@ export class GamePageComponent {
       this._router.navigate(['/TitlePage']);
     }
   }
-
+  public loadScoresData() {
+    this._highScores.loadScores().subscribe({
+      next: (data) => {
+        this.highScores = [...data];
+        this.sendHighScores(data);
+        console.log('we got our data from http!', data);
+      },
+      error: (err) => {
+        console.log('we got an error, maybe no token', err);
+      },
+    });
+  }
+  PushScore() {
+    this._highScores.postScore().subscribe({
+      next: (data) => {
+        console.log('entry sent succesfully', data);
+      },
+      error: (err) => console.log('OH NO', err),
+    });
+  }
+  sendMyScoreToService() {
+    this._highScores.myScore = {
+      name: this._playerData.playerData.name,
+      game: 'snake',
+      score: this.CurrentGameData.pointsEarned,
+    };
+  }
+  sendHighScores(data: Array<Scores>) {
+    this._highScores.highScores = [...data];
+  }
   public PushCurrentData(message: string) {
     this.CurrentGameData.gamePlayHistory.push({
       Time: this.CurrentGameData.timePlayed,
@@ -71,6 +118,8 @@ export class GamePageComponent {
     this.GameStatus.isReady = false;
     this.stopTimer();
     this.PushCurrentData('Game Over');
+    this.sendMyScoreToService();
+    this.PushScore();
   }
   public startTimer() {
     this.Interval = setInterval(() => {

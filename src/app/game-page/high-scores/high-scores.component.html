@@ -1,0 +1,61 @@
+
+<div class="button-container">
+  <br/>
+  <button
+    *ngIf="!showScores"
+    class="btn btn-primary btn-lg"
+    (click)="handleShowScores()"
+  >
+    Show Scores
+  </button>
+  <button
+    *ngIf="showScores"
+    class="btn btn-primary btn-lg"
+    (click)="handleShowScores()"
+  >
+    Hide Scores
+  </button>
+</div>
+<div class="stats-container" *ngIf="showScores">
+  <span class="button-container">
+    <button class="btn btn-primary btn-sm" (click)="handleShowHighScores()">
+      High Scores
+    </button>
+    <button class="btn btn-primary btn-sm" (click)="handleShowMycores()">
+      My Scores
+    </button>
+  </span>
+  <div>
+    <label for="Sorting">Sorting:</label>
+    <select
+      id="Sorting"
+      class="form-select form-select-lg mb-3"
+      [(ngModel)]="howToSort"
+    >
+      <option value="ascending">ascending</option>
+      <option value="descending">descending</option>
+    </select>
+    <hr />
+  </div>
+  <div *ngIf="showHighScores">
+    <h6 style="text-align: center">10 best Global scores:</h6>
+    <ol class="Scores" style="text-align: left">
+      <div *ngFor="let score of highScores | onlyXBest:10 | sort: howToSort:'score'">
+        <li>{{ score.name }} {{ score.score }}</li>
+      </div>
+    </ol>
+  </div>
+  <div *ngIf="showMyScores">
+  <h6 style="text-align: center">Your 10 best Scores:</h6>
+    <ol class="Scores" style="text-align: left">
+      <div *ngFor="let score of highScores |filter:'name':playerInfo.name| onlyXBest:10 | sort: howToSort:'score'">
+        <li>{{ score.name }} {{ score.score }}</li>
+      </div>
+    </ol>
+  </div>
+  <div *ngIf="!showHighScores && !showMyScores">
+    <h6 style="text-align: center">Pick scores to Display!</h6>
+  </div>
+</div>
+<!-- {{playerInfo|json}} -->
+<!-- {{playerInfo.name}} -->

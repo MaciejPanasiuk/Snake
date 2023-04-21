@@ -6,9 +6,10 @@ import { playerAction } from './definitions';
 })
 export class FilterPipe implements PipeTransform {
   transform(
-    value: Array<playerAction>,
+    value: Array<any>,
+    filterbyKey:string,
     howToFilter: string
-  ): Array<playerAction> {
+  ): Array<any> {
     if (!value) {
       return value;
     }
@@ -17,9 +18,14 @@ export class FilterPipe implements PipeTransform {
     }
     
     return value.filter((item) => {
-      if (item.Action === howToFilter) {
+      if (item[filterbyKey] === howToFilter) {
         return true;
       }
+      // else if (howToFilter.toLowerCase()==='true') {
+      //   return true;
+      // else if (typeof item[filterbyKey]==='boolean'&& howToFilter.toLowerCase()==='true') {
+      //   return true;
+      // }
       return false;
     });
   }

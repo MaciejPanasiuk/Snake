@@ -1,5 +1,5 @@
 <div class="Game">
-  <h1>Welcome to our Snake Game {{ playerInfo.Name }}!</h1>
+  <h1>Welcome to our Snake Game {{ playerInfo.name }}!</h1>
   <app-game-status [GameStatus]="GameStatus"
   [CurrentGameData]="CurrentGameData"
 ></app-game-status>
@@ -26,8 +26,10 @@
       exit to Title Page
     </button>
   </div>
+  <!-- {{highScores |json}} -->
   <br />
 </div>
 <app-game-info  class="right-container" [CurrentGameData]="CurrentGameData"></app-game-info>
+<app-high-scores class="left-container"[highScores]="highScores"[playerInfo]="playerInfo"></app-high-scores>
 
 

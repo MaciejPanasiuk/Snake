@@ -9,14 +9,16 @@ import { Player } from './definitions';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private _router: Router,
-    private _playerData:PlayerDataService) { }
+  constructor(
+    // private _router: Router,
+    // private _playerData:PlayerDataService
+    ) { }
   title = 'Snake';
-  public playerInfo: Player = {
-    //zmienna pustego objektu ts z pobranym interfejsem
-    Name: '',
-    Email: '',
-  };
+  // public playerInfo: Player = {
+  //   //zmienna pustego objektu ts z pobranym interfejsem
+  //   name: '',
+  //   auth_token: '',
+  // };
   // public playerData: Array<Player> = [];
   // recievePlayerInfo($event: Player) {
   //   //przypisujemy do obiektu nowe dane z title

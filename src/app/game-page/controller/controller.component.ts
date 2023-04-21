@@ -29,7 +29,7 @@ export class ControllerComponent {
       isGameOver: false,
     };
   }
-  public Interval: any;
+  // public Interval: any;
   public onStartButtonPressed() {
     this._snake.actionStart();
     this.PushCurrentData('action Start');
@@ -61,13 +61,6 @@ export class ControllerComponent {
     this._snake.actionDown();
     this.PushCurrentData('action Down');
   }
-  // public PushCurrentData(message: string) {
-  //   this.CurrentGameData.gamePlayHistory.push({
-  //     Time: this.CurrentGameData.timePlayed,
-  //     Action: message,
-  //   });
-  //   this.saveGameDataEvent.emit(this.CurrentGameData)
-  // }
   public PushCurrentData(message: string) {
     this.saveGameDataEvent.emit({
       Time: this.CurrentGameData.timePlayed,
@@ -102,12 +95,4 @@ export class ControllerComponent {
     this.saveStatusEvent.emit(this.GameStatus);
     this.startTimer.emit();
   }
-  // private startTimer() {
-  //   this.Interval = setInterval(() => {
-  //     this.CurrentGameData.timePlayed++;
-  //   }, 1000);
-  // }
-  // public stopTimer() {
-  //   clearInterval(this.Interval);
-  // }
 }

@@ -6,20 +6,36 @@
                 type="text"
                 #name="ngModel"
                 class="form-control form-control-sm"
-                required [(ngModel)]="playerInfo.Name"
+                required [(ngModel)]="playerInfo.name"
                 minlength="3"/>
     <div class="alert alert-danger" [ngStyle]="{'visibility':!name.valid && isInfoInvalid ? 'visible' : 'hidden'}">Your name must be at least 3 characters long</div><br/>      
 </div>
-    <div class="form-group">
-        <label for ="Email">Email Adress</label>
-        <input id="Email"
-                name="email"
-                type="email"
-                #email="ngModel"
+    <!-- <div class="form-group">
+        <label for ="auth_token">Token</label>
+        <input id="auth_token"
+                name="auth_token"
+                type="text"
+                #auth_token="ngModel"
+                class="form-control form-control-sm "
+                pattern="^[0-9]{4}$" 
+                required [(ngModel)]="playerInfo.auth_token"/>
+    <div class="alert alert-danger" [ngStyle]="{'visibility':!auth_token.valid && isInfoInvalid? 'visible' : 'hidden'}">Token is required,check your student info      
+    </div><br/>
+    </div> -->
+        <div class="form-group">
+        <label for ="auth_token">Student ID</label>
+        <input id="auth_token"
+                name="auth_token"
+                type="text"
+                #auth_token="ngModel"
                 class="form-control form-control-sm " 
-                required [(ngModel)]="playerInfo.Email"
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
-    <div class="alert alert-danger" [ngStyle]="{'visibility':!email.valid && isInfoInvalid? 'visible' : 'hidden'}">Your email is invalid please type in a correct one like: example@mail.com</div><br/>
+                required [(ngModel)]="playerInfo.auth_token"/>
+<div>
+    <div *ngIf="isTokenSubmited; then showTokenError else showInputError"></div>
+    <ng-template #showTokenError><div class="alert alert-danger" [ngStyle]="{'visibility':auth_token.valid && !isTokenInvalid && isInfoInvalid? 'visible' : 'hidden'}">Student ID Authentication failed</div></ng-template>
+<ng-template #showInputError><div class="alert alert-danger" [ngStyle]="{'visibility':!auth_token.valid && isInfoInvalid? 'visible' : 'hidden'}">Please type in your Student ID</div></ng-template>
+</div>
+    <br/>
     </div>
     <div class="fixed-bottom">
     <div *ngIf="playerForm.valid; then thenBlock else elseBlock"></div>
