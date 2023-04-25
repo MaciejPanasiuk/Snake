@@ -52,7 +52,7 @@ export class GamePageComponent {
     this.highScores = this._highScores.highScores;
     this.playerInfo = this._playerData.readData();
     this.CurrentGameData.playerName = this.playerInfo.name;
-    this.IntervalId == setInterval(() => this.loadScoresData(), 30000);
+    this.IntervalId = setInterval(() => this.loadScoresData(), 30000);
   }
   ngOnDestroy() {
     clearInterval(this.IntervalId);
@@ -69,7 +69,7 @@ export class GamePageComponent {
     this._highScores.loadScores().subscribe({
       next: (data) => {
         this.highScores = [...data];
-        this.sendHighScores(data);
+        this._highScores.SaveHighScoreData(this.highScores)
         console.log('we got our data from http!', data);
       },
       error: (err) => {
@@ -84,16 +84,6 @@ export class GamePageComponent {
       },
       error: (err) => console.log('OH NO', err),
     });
-  }
-  sendMyScoreToService() {
-    this._highScores.myScore = {
-      name: this._playerData.playerData.name,
-      game: 'snake',
-      score: this.CurrentGameData.pointsEarned,
-    };
-  }
-  sendHighScores(data: Array<Scores>) {
-    this._highScores.highScores = [...data];
   }
   public PushCurrentData(message: string) {
     this.CurrentGameData.gamePlayHistory.push({
@@ -118,7 +108,11 @@ export class GamePageComponent {
     this.GameStatus.isReady = false;
     this.stopTimer();
     this.PushCurrentData('Game Over');
-    this.sendMyScoreToService();
+    this._highScores.sendMyScoreToService({
+      name: this._playerData.playerData.name,
+      game: 'snake',
+      score: this.CurrentGameData.pointsEarned,
+    })
     this.PushScore();
   }
   public startTimer() {
