@@ -50,4 +50,7 @@ export class GamesServerService {
   SaveHighScoreData(data: Array<Scores>) {
     this.highScores = [...data];
   }
+  sendMyScoreToService(data:Scores) {
+    this.myScore = data;
+  }
 }

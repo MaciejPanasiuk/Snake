@@ -1,7 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Scores, playerAction } from './definitions';
-import { orderBy } from 'lodash';
-
 
 @Pipe({
   name: 'sort'

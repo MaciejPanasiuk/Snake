@@ -21,5 +21,8 @@ export class PlayerDataService {
   PlayerInfoSubmited() {
     return this._isDataVerified;
   }
+  savePlayerData(data:Player){
+    this.playerData=data;
+  }
   constructor() {}
 }

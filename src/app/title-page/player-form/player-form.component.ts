@@ -25,7 +25,7 @@ export class PlayerFormComponent {
   public isTokenSubmited: boolean = false;
   public token: Authentication = { 'auth-token': '' };
   moveToGame() {
-    this.sendPlayerinfo();
+    this._playerData.savePlayerData(this.playerInfo)
     this.isTokenSubmited = true;
     this.CheckTokenAuth();
   }
@@ -44,9 +44,6 @@ export class PlayerFormComponent {
       },
       error: (err) => console.log('authentication failed', err),
     });
-  }
-  sendPlayerinfo() {
-    this._playerData.playerData = this.playerInfo;
   }
   showErrorMessages() {
     this.isInfoInvalid = true;
