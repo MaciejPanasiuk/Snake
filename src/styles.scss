@@ -12,3 +12,24 @@ body, html {
     background-repeat: round;
     background-size: cover;
   }
+  ngx-snake {
+    &.black-and-white{
+        ngx-snake-tile {
+          background: #ffffff;
+          &.free {
+              div {
+                  background: #ffffff;
+              }
+          }
+
+          &.head,
+          &.tail,
+          &.food,
+          &.body {
+              div {
+                  background: #000000;
+              }
+          }
+      }
+  }
+}

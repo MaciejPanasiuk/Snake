@@ -1,4 +1,4 @@
-<form #playerForm="ngForm">
+<!-- <form #playerForm="ngForm">
     <div class="form-group">
         <label for ="Name">Player Name</label>
         <input id="Name" 
@@ -10,18 +10,6 @@
                 minlength="3"/>
     <div class="alert alert-danger" [ngStyle]="{'visibility':!name.valid && isInfoInvalid ? 'visible' : 'hidden'}">Your name must be at least 3 characters long</div><br/>      
 </div>
-    <!-- <div class="form-group">
-        <label for ="auth_token">Token</label>
-        <input id="auth_token"
-                name="auth_token"
-                type="text"
-                #auth_token="ngModel"
-                class="form-control form-control-sm "
-                pattern="^[0-9]{4}$" 
-                required [(ngModel)]="playerInfo.auth_token"/>
-    <div class="alert alert-danger" [ngStyle]="{'visibility':!auth_token.valid && isInfoInvalid? 'visible' : 'hidden'}">Token is required,check your student info      
-    </div><br/>
-    </div> -->
         <div class="form-group">
         <label for ="auth_token">Student ID</label>
         <input id="auth_token"
@@ -42,4 +30,76 @@
 <ng-template #thenBlock><button class="btn btn-primary btn-lg"(click)="moveToGame()">Start Game</button><br/></ng-template>
 <ng-template #elseBlock><button class="btn btn-primary btn-lg"(click)="showErrorMessages()">Start Game</button><br/></ng-template>
 </div>
+</form> -->
+<form [formGroup]="playerForm" submit="onSubmit()">
+  <div class="form-group">
+    <label for="name">Player Name</label>
+    <input
+      name="name"
+      type="text"
+      class="form-control form-control-sm"
+      formControlName="name"
+    />
+    <div
+      class="alert alert-warning"
+      [ngStyle]="{
+        visibility:
+          !playerForm.controls['name'].valid && !isInfoValid
+            ? 'visible'
+            : 'hidden'
+      }"
+    >
+      Your name must be at least 5 characters long
+    </div>
+    <br />
+  </div>
+  <div class="form-group">
+    <label for="auth_token">Student ID</label>
+    <input
+      name="auth_token"
+      type="text"
+      class="form-control form-control-sm"
+      formControlName="auth_token"
+    />
+    <div>
+      <div
+        *ngIf="isTokenSubmited; then showTokenError; else showInputError"
+      ></div>
+      <ng-template #showTokenError
+        ><div
+          class="alert alert-danger"
+          [ngStyle]="{
+            visibility:
+              playerForm.controls['auth_token'].valid &&
+              !isTokenValid &&
+              !isInfoValid
+                ? 'visible'
+                : 'hidden'
+          }"
+        >
+          Student ID Incorrect, please try again
+        </div></ng-template
+      >
+      <ng-template #showInputError
+        ><div
+          class="alert alert-warning"
+          [ngStyle]="{
+            visibility:
+              !playerForm.controls['auth_token'].valid && !isInfoValid
+                ? 'visible'
+                : 'hidden'
+          }"
+        >
+          your student ID must be at least 4 characters long
+        </div></ng-template
+      >
+    </div>
+    <br />
+  </div>
+  <div class="fixed-bottom">
+        <button class="btn btn-primary btn-lg" (click)="onSubmit()"> 
+        Start Game</button
+      >
+  </div>
 </form>
+{{this.playerForm.valid}}

@@ -4,7 +4,7 @@ import { NgxSnakeModule } from 'ngx-snake';
 import { AppComponent } from './app.component';
 import { TitlePageComponent } from './title-page/title-page.component';
 import { GamePageComponent } from './game-page/game-page.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SortPipe } from './sort.pipe';
 import { FilterPipe } from './filter.pipe';
 import { RouterModule } from '@angular/router';
@@ -35,6 +35,7 @@ import { OnlyXBestPipe } from './only-xbest.pipe';
     BrowserModule,
     NgxSnakeModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       {path:'TitlePage',component: TitlePageComponent},
       {path:'GamePage',component: GamePageComponent},

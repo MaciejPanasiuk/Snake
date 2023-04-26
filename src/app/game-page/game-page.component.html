@@ -7,13 +7,15 @@
 <br />
 <br />
   <ngx-snake
+  class="black-and-white"
     #game
     (foodEaten)="onFoodEaten()"
     (gameOver)="onGameOver()"
   ></ngx-snake>
   <br />
   <br />
-  <app-controller [_snake]="_snake"
+  <app-controller 
+  [_snake]="_snake"
   [CurrentGameData]="CurrentGameData"
   (saveGameDataEvent)="onDataSaved($event)"
   (saveStatusEvent)="onStatusSaved($event)"
