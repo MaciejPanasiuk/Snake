@@ -38,7 +38,8 @@ import { OnlyXBestPipe } from './only-xbest.pipe';
     ReactiveFormsModule,
     RouterModule.forRoot([
       {path:'TitlePage',component: TitlePageComponent},
-      {path:'GamePage',component: GamePageComponent},
+      // {path:'GamePage',component: GamePageComponent},
+      {path:'GamePage/:palette',component: GamePageComponent},
       {path:'**',redirectTo: 'TitlePage'}
     ]),
     HttpClientModule

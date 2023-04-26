@@ -29,12 +29,14 @@ export class PlayerFormComponent {
     auth_token: ['',[
       Validators.required,
       Validators.minLength(4)
-    ]]
+    ]],
+    paletteSelected:['normal_colors',[]]
   })
   // public playerInfo: Player = {
   //   name: '',
   //   auth_token: '',
   // };
+  // public paletteSelected: string='normal'
   public isInfoValid: boolean = true;
   public isTokenValid: boolean =true;
   public isTokenSubmited: boolean = false;
@@ -58,7 +60,7 @@ export class PlayerFormComponent {
           this.isTokenValid = true;
           this._highScores.MarkTokenAsValid();
           this._playerData.MarkInfoAsSubmited();
-          this._router.navigate(['/GamePage']);
+          this._router.navigate(['/GamePage',this.playerForm.value.paletteSelected]);
         } else {
           this.showErrorMessages();
           console.log('auth failed', data);
@@ -74,7 +76,9 @@ export class PlayerFormComponent {
     if(localStorage.getItem('playerName')){
       this.playerForm.setValue({
         name:`${localStorage.getItem('playerName')}`,
-        auth_token:''
+        auth_token:'',
+        paletteSelected:`${localStorage.getItem('pallete')}`
+
       },{emitEvent: false})
     }
   }
@@ -85,6 +89,7 @@ export class PlayerFormComponent {
     if(this.playerForm.valid)
     {
       localStorage.setItem('playerName',`${this.playerForm.value.name}`)
+      localStorage.setItem('pallete',`${this.playerForm.value.paletteSelected}`)
       this.moveToGame()
     }
     else{

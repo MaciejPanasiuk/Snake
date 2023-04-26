@@ -8,7 +8,7 @@ import {
   playerAction,
   Scores,
 } from '../definitions';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ControllerComponent } from './controller/controller.component';
 import { GamesServerService } from '../games-server.service';
 
@@ -40,13 +40,17 @@ export class GamePageComponent {
   public highScores: Array<Scores> = [];
   public Interval: any;
   public IntervalId: any;
+  public palette:string=''
   constructor(
     private _router: Router,
+    private _route:ActivatedRoute,
     private _playerData: PlayerDataService,
-    private _highScores: GamesServerService
+    private _highScores: GamesServerService,
   ) {
     this.DataSubmitCheck();
     this.loadScoresData();
+    this.saveSelectedPalette()
+
   }
   ngOnInit(): void {
     this.highScores = this._highScores.highScores;
@@ -56,6 +60,10 @@ export class GamePageComponent {
   }
   ngOnDestroy() {
     clearInterval(this.IntervalId);
+  }
+  public saveSelectedPalette(){
+    this._route.params.subscribe(params=>{
+      this.palette=params['palette']})
   }
   public backToTitle() {
     this._router.navigate(['/TitlePage']);
