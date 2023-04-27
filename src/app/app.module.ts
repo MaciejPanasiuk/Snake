@@ -15,6 +15,7 @@ import { GameStatusComponent } from './game-page/game-status/game-status.compone
 import {HttpClientModule} from "@angular/common/http";
 import { HighScoresComponent } from './game-page/high-scores/high-scores.component';
 import { OnlyXBestPipe } from './only-xbest.pipe';
+import { PlayerDataGuardService } from './player-data-guard.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { OnlyXBestPipe } from './only-xbest.pipe';
     ReactiveFormsModule,
     RouterModule.forRoot([
       {path:'TitlePage',component: TitlePageComponent},
-      // {path:'GamePage',component: GamePageComponent},
+      // {path:'GamePage/:palette',component: GamePageComponent,canActivate: [PlayerDataGuardService]},
       {path:'GamePage/:palette',component: GamePageComponent},
       {path:'**',redirectTo: 'TitlePage'}
     ]),

@@ -19,7 +19,9 @@ export class PlayerFormComponent {
     public _fb: FormBuilder,
   ) {}
   ngOnInit(): void {
+      this._playerData.clearPlayerData();
       this.CheckLocalStorage()
+      this.data=this._playerData.readstatus()
   }
   public playerForm=this._fb.group({
     name: ['',[
@@ -32,21 +34,13 @@ export class PlayerFormComponent {
     ]],
     paletteSelected:['normal_colors',[]]
   })
-  // public playerInfo: Player = {
-  //   name: '',
-  //   auth_token: '',
-  // };
-  // public paletteSelected: string='normal'
+  public data:any=''
   public isInfoValid: boolean = true;
   public isTokenValid: boolean =true;
   public isTokenSubmited: boolean = false;
   public token: Authentication = { 'auth-token': '' };
   public authTokenErrorMessage: string='your student ID must be at least 4 characters long'
-  // moveToGame() {
-  //   this._playerData.savePlayerData(this.playerInfo)
-  //   this.isTokenSubmited = true;
-  //   this.CheckTokenAuth();
-  // }
+
   moveToGame() {
     this._playerData.savePlayerData({name:this.playerForm.value.name!,auth_token:this.playerForm.value.auth_token!})
     this.isTokenSubmited = true;

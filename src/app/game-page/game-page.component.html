@@ -23,14 +23,18 @@
   (stopTimer)='stopTimer()'
 ></app-controller>
   <br />
-    <div class="row justify-content-md-center d-md-block">
-    <button class="btn btn-dark col-3 btn-lg" (click)="backToTitle()">
+  <div class="row justify-content-md-center d-md-block">
+    <button class="retroBtn blue" (click)="backToTitle()">
       exit to Title Page
     </button>
-<!-- <button class="btn btn-dark col-3 btn-lg">high contrast palette</button> -->
 
+    <!-- <button *ngIf="palette==='normal_colors'" class="btn btn-light col-3 btn-lg" (click)="onPaletteChange()">Swap to Black & White</button>
+    <button *ngIf="palette==='high_contrast'" class="btn btn-primary col-3 btn-lg" (click)="onPaletteChange()">Swap to Colors</button> -->
+    <button *ngIf="palette==='normal_colors'" class="retroBtn contrast" (click)="onPaletteChange()">Swap to Black & White</button>
+    <button *ngIf="palette==='high_contrast'" class="retroBtn green" (click)="onPaletteChange()">Swap to Colors</button>
   </div>
   <br />
 <app-high-scores class="left-container"[highScores]="highScores"[playerInfo]="playerInfo"></app-high-scores>
-<app-game-info  class="right-container" [CurrentGameData]="CurrentGameData"></app-game-info>
-<!-- {{this.palette}} -->
+{{data}}
+
+

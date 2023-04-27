@@ -91,9 +91,10 @@
 </select>
 </div>
   <div class="fixed-bottom">
-        <button class="btn btn-primary btn-lg" (click)="onSubmit()"> 
-          <!-- <button playerForm.value.paletteSelected='normal_colors'? class="btn btn-primary btn-lg":class="btn btn-dark btn-lg" (click)="onSubmit()">  -->
+        <button [ngClass]="playerForm.value.paletteSelected==='normal_colors'?'btn btn-primary btn-lg':'btn btn-light btn-lg'" (click)="onSubmit()"> 
+
         Start Game</button
       >
   </div>
 </form>
+{{this.playerForm.valid}}
