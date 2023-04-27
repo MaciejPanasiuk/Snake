@@ -1,14 +1,14 @@
     <div class="button-container">
       <button
         *ngIf="!showStats"
-        class="btn btn-primary btn-lg"
+        class="retroBtn blue"
         (click)="statsStatus()"
       >
         Show Gameplay Data
       </button>
       <button
         *ngIf="showStats"
-        class="btn btn-primary btn-lg"
+        class="retroBtn blue"
         (click)="statsStatus()"
       >
         Hide Gameplay Data
@@ -34,7 +34,7 @@
         </select>
       </div>
       <div>
-        <label for="Sorting">Filtering:</label>
+        <label for="Filtering">Filtering:</label>
         <select
           id="Filtering"
           class="form-select form-select-lg mb-3"

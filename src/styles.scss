@@ -13,7 +13,7 @@ body, html {
     background-size: cover;
   }
   ngx-snake {
-    &.black-and-white{
+    &.high_contrast{
         ngx-snake-tile {
           background: #ffffff;
           &.free {
@@ -28,6 +28,27 @@ body, html {
           &.body {
               div {
                   background: #000000;
+              }
+          }
+      }
+  }
+}
+ngx-snake {
+    &.normal_colors{
+        ngx-snake-tile {
+          background: #ffffff;
+          &.free {
+              div {
+                  background: #bbd4bfe0;
+              }
+          }
+
+          &.head,
+          &.tail,
+          &.food,
+          &.body {
+              div {
+                  background: #217235;
               }
           }
       }

@@ -5,7 +5,7 @@ import { Player } from './definitions';
   providedIn: 'root',
 })
 export class PlayerDataService {
-  private _isDataVerified = false;
+  public _isDataSubmited = false;
   public playerData: Player = {
     //zmienna pustego objektu ts z pobranym interfejsem
     name: '',
@@ -15,14 +15,33 @@ export class PlayerDataService {
   readData() {
     return this.playerData;
   }
+  readstatus(){
+    return this._isDataSubmited;
+  }
   MarkInfoAsSubmited() {
-    this._isDataVerified = true;
+    this._isDataSubmited = true;
   }
   PlayerInfoSubmited() {
-    return this._isDataVerified;
+    return this._isDataSubmited;
   }
   savePlayerData(data:Player){
     this.playerData=data;
+  }
+  clearPlayerData(){
+    this.playerData={
+      name: '',
+      auth_token: '',
+      playerAction: {},
+    };
+    // this._isDataSubmited = false;
+  }
+  isplayerInfoSubmited(){
+    if(this.playerData.name!==''&& this.playerData.auth_token!=='')
+    {return true;}
+    else{
+      return false
+    }
+
   }
   constructor() {}
 }

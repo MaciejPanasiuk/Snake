@@ -4,7 +4,7 @@ import { TotalGameData } from 'src/app/definitions';
 @Component({
   selector: 'app-game-info',
   templateUrl: './game-info.component.html',
-  styleUrls: ['./game-info.component.scss']
+  styleUrls: ['./game-info.component.scss','../game-page.component.scss']
 })
 export class GameInfoComponent {
     @Input() CurrentGameData: TotalGameData;

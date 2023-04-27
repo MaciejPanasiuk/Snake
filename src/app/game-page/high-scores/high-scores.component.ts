@@ -3,7 +3,7 @@ import { Player, Scores } from 'src/app/definitions';
 @Component({
   selector: 'app-high-scores',
   templateUrl: './high-scores.component.html',
-  styleUrls: ['./high-scores.component.scss']
+  styleUrls: ['./high-scores.component.scss','../game-page.component.scss']
 })
 export class HighScoresComponent {
   @Input() public highScores: Array<Scores> = [];

@@ -7,7 +7,7 @@
 <br />
 <br />
   <ngx-snake
-  class="black-and-white"
+  class={{this.palette}}
     #game
     (foodEaten)="onFoodEaten()"
     (gameOver)="onGameOver()"
@@ -24,14 +24,19 @@
 ></app-controller>
   <br />
   <div class="row justify-content-md-center d-md-block">
-    <button class="btn btn-primary col-4 btn-lg" (click)="backToTitle()">
+    <button class="retroBtn blue" (click)="backToTitle()">
       exit to Title Page
     </button>
+
+    <!-- <button *ngIf="palette==='normal_colors'" class="btn btn-light col-3 btn-lg" (click)="onPaletteChange()">Swap to Black & White</button>
+    <button *ngIf="palette==='high_contrast'" class="btn btn-primary col-3 btn-lg" (click)="onPaletteChange()">Swap to Colors</button> -->
+    <button *ngIf="palette==='normal_colors'" class="retroBtn contrast" (click)="onPaletteChange()">Swap to Black & White</button>
+    <button *ngIf="palette==='high_contrast'" class="retroBtn green" (click)="onPaletteChange()">Swap to Colors</button>
   </div>
-  <!-- {{highScores |json}} -->
   <br />
 </div>
 <app-game-info  class="right-container" [CurrentGameData]="CurrentGameData"></app-game-info>
 <app-high-scores class="left-container"[highScores]="highScores"[playerInfo]="playerInfo"></app-high-scores>
+{{data}}
 
 

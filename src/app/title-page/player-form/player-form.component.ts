@@ -19,7 +19,9 @@ export class PlayerFormComponent {
     public _fb: FormBuilder,
   ) {}
   ngOnInit(): void {
+      this._playerData.clearPlayerData();
       this.CheckLocalStorage()
+      this.data=this._playerData.readstatus()
   }
   public playerForm=this._fb.group({
     name: ['',[
@@ -29,22 +31,16 @@ export class PlayerFormComponent {
     auth_token: ['',[
       Validators.required,
       Validators.minLength(4)
-    ]]
+    ]],
+    paletteSelected:['normal_colors',[]]
   })
-  // public playerInfo: Player = {
-  //   name: '',
-  //   auth_token: '',
-  // };
+  public data:any=''
   public isInfoValid: boolean = true;
   public isTokenValid: boolean =true;
   public isTokenSubmited: boolean = false;
   public token: Authentication = { 'auth-token': '' };
   public authTokenErrorMessage: string='your student ID must be at least 4 characters long'
-  // moveToGame() {
-  //   this._playerData.savePlayerData(this.playerInfo)
-  //   this.isTokenSubmited = true;
-  //   this.CheckTokenAuth();
-  // }
+
   moveToGame() {
     this._playerData.savePlayerData({name:this.playerForm.value.name!,auth_token:this.playerForm.value.auth_token!})
     this.isTokenSubmited = true;
@@ -58,7 +54,7 @@ export class PlayerFormComponent {
           this.isTokenValid = true;
           this._highScores.MarkTokenAsValid();
           this._playerData.MarkInfoAsSubmited();
-          this._router.navigate(['/GamePage']);
+          this._router.navigate(['/GamePage',this.playerForm.value.paletteSelected]);
         } else {
           this.showErrorMessages();
           console.log('auth failed', data);
@@ -74,7 +70,9 @@ export class PlayerFormComponent {
     if(localStorage.getItem('playerName')){
       this.playerForm.setValue({
         name:`${localStorage.getItem('playerName')}`,
-        auth_token:''
+        auth_token:'',
+        paletteSelected:`${localStorage.getItem('pallete')}`
+
       },{emitEvent: false})
     }
   }
@@ -85,6 +83,7 @@ export class PlayerFormComponent {
     if(this.playerForm.valid)
     {
       localStorage.setItem('playerName',`${this.playerForm.value.name}`)
+      localStorage.setItem('pallete',`${this.playerForm.value.paletteSelected}`)
       this.moveToGame()
     }
     else{

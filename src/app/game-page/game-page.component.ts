@@ -8,7 +8,7 @@ import {
   playerAction,
   Scores,
 } from '../definitions';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ControllerComponent } from './controller/controller.component';
 import { GamesServerService } from '../games-server.service';
 
@@ -40,31 +40,50 @@ export class GamePageComponent {
   public highScores: Array<Scores> = [];
   public Interval: any;
   public IntervalId: any;
+  public palette:string=''
+  public isHighContrast:boolean=false
   constructor(
     private _router: Router,
+    private _route:ActivatedRoute,
     private _playerData: PlayerDataService,
-    private _highScores: GamesServerService
+    private _highScores: GamesServerService,
   ) {
-    this.DataSubmitCheck();
+    // this.DataSubmitCheck();
     this.loadScoresData();
+    this.saveSelectedPalette()
+    this.data=this._playerData.readstatus()
+
   }
+  public data:any=''
   ngOnInit(): void {
     this.highScores = this._highScores.highScores;
     this.playerInfo = this._playerData.readData();
     this.CurrentGameData.playerName = this.playerInfo.name;
+    
     this.IntervalId = setInterval(() => this.loadScoresData(), 30000);
   }
   ngOnDestroy() {
     clearInterval(this.IntervalId);
   }
+  public saveSelectedPalette(){
+    this._route.params.subscribe(params=>{
+      this.palette=params['palette']})
+
+  }
+  public onPaletteChange(){
+    if(this.palette==='normal_colors')
+    {this._router.navigate(['/GamePage',`high_contrast`]);}
+    else 
+    {this._router.navigate(['/GamePage','normal_colors']);}
+  }
   public backToTitle() {
     this._router.navigate(['/TitlePage']);
   }
-  public DataSubmitCheck() {
-    if (this._playerData.PlayerInfoSubmited() === false) {
-      this._router.navigate(['/TitlePage']);
-    }
-  }
+  // public DataSubmitCheck() {
+  //   if (this._playerData.PlayerInfoSubmited() === false) {
+  //     this._router.navigate(['/TitlePage']);
+  //   }
+  // }
   public loadScoresData() {
     this._highScores.loadScores().subscribe({
       next: (data) => {
