@@ -1,76 +1,75 @@
-    <div class="button-container">
-      <button
-        *ngIf="!showStats"
-        class="retroBtn blue"
-        (click)="statsStatus()"
+<div class="button-container">
+  <button
+    *ngIf="!showStats"
+    class="retroBtn blue"
+    (click)="statsStatus()"
+  >
+    Show Gameplay Data
+  </button>
+  <button
+    *ngIf="showStats"
+    class="retroBtn blue"
+    (click)="statsStatus()"
+  >
+    Hide Gameplay Data
+  </button>
+</div>
+<br />
+<div class="stats-container" *ngIf="showStats">
+  <h6 style="text-align: center">Last game-basic info:</h6>
+  <div style="text-align: start">
+    Player Name: {{ CurrentGameData.playerName }}<br />
+    Points Earned: {{ CurrentGameData.pointsEarned }}<br />
+    Time Played: {{ CurrentGameData.timePlayed }}s
+  </div>
+  <div>
+    <label for="Sorting">Sorting:</label>
+    <select
+      id="Sorting"
+      class="form-select form-select-lg mb-3"
+      [(ngModel)]="howToSort"
+    >
+      <option value="ascending">ascending</option>
+      <option value="descending">descending</option>
+    </select>
+  </div>
+  <div>
+    <label for="Filtering">Filtering:</label>
+    <select
+      id="Filtering"
+      class="form-select form-select-lg mb-3"
+      [(ngModel)]="howToFilter"
+    >
+      <option value="show All">show All</option>
+      <option *ngFor="let item of allActionFilters" [value]="item">
+        {{ item }}
+      </option>
+    </select>
+  </div>
+  <div *ngIf="CurrentGameData.gamePlayHistory.length !== 0">
+    <ol class="gamePlay">
+      <hr />
+      <h6 style="text-align: center">Gameplay history:</h6>
+      <li
+        *ngFor="
+          let item of CurrentGameData.gamePlayHistory
+            | filter :'Action': howToFilter
+            | sort : howToSort:'Time';
+          let i = index
+        "
       >
-        Show Gameplay Data
-      </button>
-      <button
-        *ngIf="showStats"
-        class="retroBtn blue"
-        (click)="statsStatus()"
-      >
-        Hide Gameplay Data
-      </button>
-    </div>
+        {{ item.Action }} {{ item.Time }}s.
+      </li>
+    </ol>
+  </div>
+  <div
+    class="gamePlay"
+    style="text-align: center"
+    *ngIf="CurrentGameData.gamePlayHistory.length === 0"
+  >
+    Game history is empty!
     <br />
-    <div class="stats-container" *ngIf="showStats">
-      <h6 style="text-align: center">Last game-basic info:</h6>
-      <div style="text-align: start">
-        Player Name: {{ CurrentGameData.playerName }}<br />
-        Points Earned: {{ CurrentGameData.pointsEarned }}<br />
-        Time Played: {{ CurrentGameData.timePlayed }}s
-      </div>
-      <div>
-        <label for="Sorting">Sorting:</label>
-        <select
-          id="Sorting"
-          class="form-select form-select-lg mb-3"
-          [(ngModel)]="howToSort"
-        >
-          <option value="ascending">ascending</option>
-          <option value="descending">descending</option>
-        </select>
-      </div>
-      <div>
-        <label for="Filtering">Filtering:</label>
-        <select
-          id="Filtering"
-          class="form-select form-select-lg mb-3"
-          [(ngModel)]="howToFilter"
-        >
-          <option value="show All">show All</option>
-          <option *ngFor="let item of allActionFilters" [value]="item">
-            {{ item }}
-          </option>
-        </select>
-      </div>
-      <div *ngIf="CurrentGameData.gamePlayHistory.length !== 0">
-        <ol class="gamePlay">
-          <hr />
-          <h6 style="text-align: center">Gameplay history:</h6>
-          <li
-            *ngFor="
-              let item of CurrentGameData.gamePlayHistory
-                | filter :'Action': howToFilter
-                | sort : howToSort:'Time';
-              let i = index
-            "
-          >
-            {{ item.Action }} {{ item.Time }}s.
-          </li>
-        </ol>
-      </div>
-      <div
-        class="gamePlay"
-        style="text-align: center"
-        *ngIf="CurrentGameData.gamePlayHistory.length === 0"
-      >
-        Game history is empty!
-        <br />
-      </div>
-      <br />
-    </div>
-
+  </div>
+  <br />
+</div>
 
