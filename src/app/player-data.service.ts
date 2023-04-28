@@ -35,13 +35,13 @@ export class PlayerDataService {
     };
     // this._isDataSubmited = false;
   }
-  isplayerInfoSubmited(){
-    if(this.playerData.name!==''&& this.playerData.auth_token!=='')
-    {return true;}
-    else{
-      return false
-    }
+  // isplayerInfoSubmited(){
+  //   if(this.playerData.name!==''&& this.playerData.auth_token!=='')
+  //   {return true;}
+  //   else{
+  //     return false
+  //   }
 
-  }
+  // }
   constructor() {}
 }

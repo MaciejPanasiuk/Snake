@@ -39,8 +39,8 @@ import { PlayerDataGuardService } from './player-data-guard.service';
     ReactiveFormsModule,
     RouterModule.forRoot([
       {path:'TitlePage',component: TitlePageComponent},
-      // {path:'GamePage/:palette',component: GamePageComponent,canActivate: [PlayerDataGuardService]},
-      {path:'GamePage/:palette',component: GamePageComponent},
+      {path:'GamePage/:palette',component: GamePageComponent,canActivate: [PlayerDataGuardService]},
+      // {path:'GamePage/:palette',component: GamePageComponent},
       {path:'**',redirectTo: 'TitlePage'}
     ]),
     HttpClientModule

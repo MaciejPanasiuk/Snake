@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Authentication, Player } from 'src/app/definitions';
+import { Authentication} from 'src/app/definitions';
 import { Router } from '@angular/router';
 import { PlayerDataService } from 'src/app/player-data.service';
 import { GamesServerService } from 'src/app/games-server.service';
@@ -21,7 +21,6 @@ export class PlayerFormComponent {
   ngOnInit(): void {
       this._playerData.clearPlayerData();
       this.CheckLocalStorage()
-      this.data=this._playerData.readstatus()
   }
   public playerForm=this._fb.group({
     name: ['',[
@@ -34,7 +33,6 @@ export class PlayerFormComponent {
     ]],
     paletteSelected:['normal_colors',[]]
   })
-  public data:any=''
   public isInfoValid: boolean = true;
   public isTokenValid: boolean =true;
   public isTokenSubmited: boolean = false;

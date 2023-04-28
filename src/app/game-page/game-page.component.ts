@@ -11,6 +11,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { ControllerComponent } from './controller/controller.component';
 import { GamesServerService } from '../games-server.service';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-game-page',
@@ -37,9 +38,9 @@ export class GamePageComponent {
     timePlayed: 0,
     gamePlayHistory: [],
   };
+  private _IntervalTimer!: Subscription;
+  private _IntervalScores!: Subscription;
   public highScores: Array<Scores> = [];
-  public Interval: any;
-  public IntervalId: any;
   public palette:string=''
   public isHighContrast:boolean=false
   constructor(
@@ -48,22 +49,20 @@ export class GamePageComponent {
     private _playerData: PlayerDataService,
     private _highScores: GamesServerService,
   ) {
-    // this.DataSubmitCheck();
     this.loadScoresData();
     this.saveSelectedPalette()
-    this.data=this._playerData.readstatus()
-
   }
-  public data:any=''
   ngOnInit(): void {
     this.highScores = this._highScores.highScores;
     this.playerInfo = this._playerData.readData();
-    this.CurrentGameData.playerName = this.playerInfo.name;
-    
-    this.IntervalId = setInterval(() => this.loadScoresData(), 30000);
+    this.CurrentGameData.playerName = this.playerInfo.name; 
+    this.setScoresGetInterval();
   }
   ngOnDestroy() {
-    clearInterval(this.IntervalId);
+    this._IntervalScores.unsubscribe();
+  }
+  setScoresGetInterval(){
+    this._IntervalScores=interval(30000).subscribe(() => this.loadScoresData())
   }
   public saveSelectedPalette(){
     this._route.params.subscribe(params=>{
@@ -79,11 +78,6 @@ export class GamePageComponent {
   public backToTitle() {
     this._router.navigate(['/TitlePage']);
   }
-  // public DataSubmitCheck() {
-  //   if (this._playerData.PlayerInfoSubmited() === false) {
-  //     this._router.navigate(['/TitlePage']);
-  //   }
-  // }
   public loadScoresData() {
     this._highScores.loadScores().subscribe({
       next: (data) => {
@@ -135,11 +129,10 @@ export class GamePageComponent {
     this.PushScore();
   }
   public startTimer() {
-    this.Interval = setInterval(() => {
-      this.CurrentGameData.timePlayed++;
-    }, 1000);
+    this._IntervalTimer=interval(1000).subscribe(()=>{this.CurrentGameData.timePlayed++})
+
   }
   public stopTimer() {
-    clearInterval(this.Interval);
+    this._IntervalTimer.unsubscribe();
   }
 }
