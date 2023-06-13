@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthRes, Authentication, Scores } from './definitions';
-import { PlayerDataService } from './player-data.service';
+import { AuthRes, Authentication, Scores } from '../../common/definitions';
+import { PlayerDataService } from '../player-data/player-data.service';
 import { Observable } from 'rxjs';
 
 @Injectable({

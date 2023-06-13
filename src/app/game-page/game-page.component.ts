@@ -1,16 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgxSnakeComponent } from 'ngx-snake';
-import { PlayerDataService } from '../player-data.service';
+import { PlayerDataService } from '../services/player-data/player-data.service';
 import {
   Player,
   TotalGameData,
   GameStatus,
   playerAction,
   Scores,
-} from '../definitions';
+} from '../common/definitions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ControllerComponent } from './controller/controller.component';
-import { GamesServerService } from '../games-server.service';
+import { GamesServerService } from '../services/games-server/games-server.service';
 import { Subscription, interval } from 'rxjs';
 
 @Component({
@@ -41,8 +41,8 @@ export class GamePageComponent {
   private _IntervalTimer!: Subscription;
   private _IntervalScores!: Subscription;
   public highScores: Array<Scores> = [];
-  public palette:string=''
-  public isHighContrast:boolean=false
+  public palette:string='';
+  public isHighContrast:boolean=false;
   constructor(
     private _router: Router,
     private _route:ActivatedRoute,
@@ -71,11 +71,15 @@ export class GamePageComponent {
   }
   public onPaletteChange(){
     if(this.palette==='normal_colors')
-    {this._router.navigate(['/GamePage',`high_contrast`]);}
+    {
+      localStorage.setItem('pallete',`high_contrast`)
+      this._router.navigate(['/GamePage',`high_contrast`]);}
     else 
-    {this._router.navigate(['/GamePage','normal_colors']);}
+    {localStorage.setItem('pallete',`normal_colors`)
+      this._router.navigate(['/GamePage','normal_colors']);}
   }
   public backToTitle() {
+    localStorage.setItem('isInfoSubmitted',`false`)
     this._router.navigate(['/TitlePage']);
   }
   public loadScoresData() {

@@ -1,35 +1,17 @@
 .titlePage{
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background-image: url("../images/snekForm.jpg");
     border: 3px solid rgb(175, 170, 170);
     border-radius: 25px;
-    width:600px;
-    height:465px;
+    width:30%;
+    height:450px;
+    position: relative;
+    margin: 2% auto;
 }
 h1,h5,label{
     text-align: center;
 
 }
-// label{
-//     display: block;
-// }
-// .alert{
-//     margin-bottom: 1px;
-//     line-height:30px;
-//     padding:0px 15px;
-//     text-align: center;
-//     // display:block;
-//     width:100%;
-
-// }
-// button {
-//     margin:0 auto;
-//     display:block;
-// }
-// input{
-//     width:99%;
-//     margin:auto;
-// }
+.playerFormContainer{
+    display:grid;
+    justify-content: center;
+}

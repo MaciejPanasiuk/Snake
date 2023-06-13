@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Authentication} from 'src/app/definitions';
+import { Authentication} from 'src/app/common/definitions';
 import { Router } from '@angular/router';
-import { PlayerDataService } from 'src/app/player-data.service';
-import { GamesServerService } from 'src/app/games-server.service';
+import { PlayerDataService } from 'src/app/services/player-data/player-data.service';
+import { GamesServerService } from 'src/app/services/games-server/games-server.service';
 import { FormBuilder, Validators, } from '@angular/forms';
 
 
@@ -52,11 +52,14 @@ export class PlayerFormComponent {
           this.isTokenValid = true;
           this._highScores.MarkTokenAsValid();
           this._playerData.MarkInfoAsSubmited();
+          localStorage.setItem('isInfoSubmitted',`true`)
+          // localStorage.setItem('isInfoSubmitted',`${this._playerData._isDataSubmited}`)
           this._router.navigate(['/GamePage',this.playerForm.value.paletteSelected]);
         } else {
           this.showErrorMessages();
           console.log('auth failed', data);
           this.isTokenValid = false;
+          localStorage.setItem('isInfoSubmitted',`false`)
         }
       },
       error: (err) => {console.log('authentication failed', err);

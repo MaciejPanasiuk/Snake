@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { GameStatus, TotalGameData } from 'src/app/definitions';
+import { GameStatus, TotalGameData } from 'src/app/common/definitions';
 
 @Component({
   selector: 'app-game-status',

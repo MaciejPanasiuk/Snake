@@ -1,64 +1,60 @@
 
-<div class="container">
-    <div class="row justify-content-md-center d-md-block gx-5">
+<div class="Container">
+      <div class="Util-Buttons">
       <button
-        class="col-2 btn btn-dark btn-sm"
+        class="btn btn-dark btn-lg Util"
         [disabled]="GameStatus.isGameOver"
         (click)="onStartButtonPressed()"
       >
         Start
       </button>
       <button
-        class="col-2 btn btn-dark btn-sm"
+        class="btn btn-dark btn-lg Util"
         [disabled]="GameStatus.isGameOver || GameStatus.isReady || GameStatus.isPaused"
         (click)="onStopButtonPressed()"
       >
         Stop
       </button>
       <button
-        class="col-2 btn btn-dark btn-sm"
+        class="btn btn-dark btn-lg Util"
         [disabled]="GameStatus.isReady"
         (click)="onResetButtonPressed()"
       >
         Reset
       </button>
     </div>
-    <br />
-    <div class="d-grid gap-2 gx-2">
-      <div class="row justify-content-md-center d-md-block">
+        <div class="Controls">
         <button
-          class="col-2 btn btn-dark btn-lg"
+          id="UP"
+          class="btn btn-dark btn-lg Ctrl"
           [disabled]="!GameStatus.isGo"
           (click)="onUpButtonPressed()"
         >
           Up
         </button>
-      </div>
-      <div class="row justify-content-md-center d-md-block">
+        <div class="Left-Right">
         <button
-          class="col-2 btn btn-dark btn-lg"
+          class="btn btn-dark btn-lg Ctrl"
           [disabled]="!GameStatus.isGo"
           (click)="onLeftButtonPressed()"
         >
           Left
         </button>
         <button
-          class="col-2 btn btn-dark btn-lg"
+          class="btn btn-dark btn-lg Ctrl"
           [disabled]="!GameStatus.isGo"
           (click)="onRightButtonPressed()"
         >
           Right
         </button>
       </div>
-      <div class="row justify-content-md-center d-md-block">
         <button
-          class="col-2 btn btn-dark btn-lg"
+        id="DOWN"
+          class="btn btn-dark btn-lg Ctrl"
           [disabled]="!GameStatus.isGo"
           (click)="onDownButtonPressed()"
         >
           Down
         </button>
-      </div>
-    </div>
-    <br />
+  </div>
   </div>

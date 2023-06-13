@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { playerAction } from './definitions';
+import { playerAction } from 'src/app/common/definitions'; 
 
 @Pipe({
   name: 'filter',

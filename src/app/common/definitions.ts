@@ -25,7 +25,8 @@ export interface TotalGameData {
   export interface Scores{
     'name':string;
     'game'?:string;
-    'score':number
+    'score':number;
+    'rank'?:number;
   }
   export interface AuthRes{
     success:boolean

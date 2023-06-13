@@ -1,6 +1,6 @@
 import { Component,EventEmitter,Output,Input} from '@angular/core';
 import { NgxSnakeComponent } from 'ngx-snake';
-import { playerAction,TotalGameData,GameStatus } from 'src/app/definitions';
+import { playerAction,TotalGameData,GameStatus } from 'src/app/common/definitions';
 
 @Component({
   selector: 'app-controller',

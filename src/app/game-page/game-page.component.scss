@@ -1,38 +1,45 @@
 :host {
     min-height: 500px;
-    display: inline-block;
-    width: auto;
     text-align: center;
+	position: relative;
+	margin:1% auto;
 }
 
 .controls {
     float: right;
     text-align: center;
 }
-
+.Game-Container{
+margin:1% auto;
+display:grid;
+column-gap: 2%;
+justify-items:center;
+align-items: center;
+justify-content:center;
+grid-template-columns: auto;
+}
 ngx-snake {
     display: inline-block;
+	margin-bottom:20px;
 }
 .Game{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+	grid-column: 2/3;
     background-image: url("../images/gameBG.jpg");
     border: 3px solid rgb(175, 170, 170);
     border-radius: 25px;
+	width:700px
 }
 .right-container{
-    position:absolute;
-    right:50px;
-    top:50px;
-    // display: inline-block;
+	grid-column: 3/4;
+	align-self: start;
+	justify-content: start;
+	width:430px;
 }
 .left-container{
-    position:absolute;
-    left:50px;
-    top:50px;
-    // display: inline-block;
+	grid-column: 1/2;
+	align-self: start;
+	justify-content: end;
+	width:430px;
 }
 h1{
     padding-left: 50px;
@@ -73,11 +80,11 @@ h1{
 }
 
 .retroBtn.green {
-	background: #005800;
+	background: #014101;
 	
 	&:focus,
 	&:hover {
-		background: #006800;
+		background: #035a03;
 	}
 }
 

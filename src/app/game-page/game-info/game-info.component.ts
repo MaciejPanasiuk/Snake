@@ -1,5 +1,5 @@
 import { Component,Input } from '@angular/core';
-import { TotalGameData } from 'src/app/definitions';
+import { TotalGameData } from 'src/app/common/definitions';
 
 @Component({
   selector: 'app-game-info',
@@ -8,6 +8,7 @@ import { TotalGameData } from 'src/app/definitions';
 })
 export class GameInfoComponent {
     @Input() CurrentGameData: TotalGameData;
+    @Input() public palette:String=''
     constructor() {
       this.CurrentGameData= {
         playerName: '',
@@ -20,7 +21,7 @@ export class GameInfoComponent {
       this.showStats = !this.showStats;
     }
     public showStats: boolean = false;
-    public howToSort: string = '';
+    public howToSort: string = 'ascending';
     public howToFilter: string = 'show All';
     public allActionFilters: Array<string> = [
       'action Start',

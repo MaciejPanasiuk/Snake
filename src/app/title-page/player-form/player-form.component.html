@@ -1,3 +1,4 @@
+
 <form [formGroup]="playerForm" submit="onSubmit()">
   <div class="form-group">
     <label for="name">Player Name</label>
@@ -64,21 +65,6 @@
       >
     </div>
   </div>
-  <!-- <div class="palette">
-    <label for="palette">Choose a color scheme:</label>
-  <span class="form-check">
-    <input class="form-check-input" type="radio" name="palette" id="normal_colors" formControlName="paletteSelected" value="normal_colors" checked>
-  <label class="form-check-label" for="normal_colors">
-    normal colors
-  </label>
-</span>
-<span class="form-check">
-  <input class="form-check-input" type="radio" name="palette" id="high_contrast" formControlName="paletteSelected" value="high_contrast" >
-  <label class="form-check-label" for="high_contrast">
-    high contrast
-  </label>  
-  </span>
-</div> -->
 <div>
   <label for="palette">Choose a color scheme:</label>
   <select
@@ -89,7 +75,8 @@
   <option value="high_contrast">high contrast</option>
 </select>
 </div>
-  <div class="fixed-bottom">
+  <!-- <div class="fixed-bottom"> -->
+    <div class="start-button">
         <button [ngClass]="playerForm.value.paletteSelected==='normal_colors'?'btn btn-primary btn-lg':'btn btn-light btn-lg'" (click)="onSubmit()"> 
 
         Start Game</button

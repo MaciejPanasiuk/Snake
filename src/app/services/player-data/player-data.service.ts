@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Player } from './definitions';
+import { Player } from '../../common/definitions';
 
 @Injectable({
   providedIn: 'root',
@@ -33,15 +33,6 @@ export class PlayerDataService {
       auth_token: '',
       playerAction: {},
     };
-    // this._isDataSubmited = false;
   }
-  // isplayerInfoSubmited(){
-  //   if(this.playerData.name!==''&& this.playerData.auth_token!=='')
-  //   {return true;}
-  //   else{
-  //     return false
-  //   }
-
-  // }
   constructor() {}
 }

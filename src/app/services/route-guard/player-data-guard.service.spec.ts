@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { PlayerDataGuardService } from './player-data-guard.service';
 
 describe('PlayerDataGuardService', () => {
-  let service: PlayerDataGuardService;
+  let service: typeof PlayerDataGuardService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

@@ -9,8 +9,11 @@ body, html {
   
     /* Center and scale the image nicely */
     background-position: center;
-    background-repeat: round;
+    // background-repeat: round;
+    // background-size: cover;
+    background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed
   }
   ngx-snake {
     &.high_contrast{

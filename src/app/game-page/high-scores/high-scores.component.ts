@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Player, Scores } from 'src/app/definitions';
+import { Player, Scores } from 'src/app/common/definitions';
 @Component({
   selector: 'app-high-scores',
   templateUrl: './high-scores.component.html',
@@ -11,6 +11,7 @@ export class HighScoresComponent {
     name: '',
     auth_token: '',
   };
+  @Input() public palette:String=''
   constructor(
   ) {
   }
@@ -21,7 +22,7 @@ export class HighScoresComponent {
   public showScores:boolean=false;
   public showHighScores: boolean = false
   public showMyScores: boolean = false;
-  public howToSort: string = '';
+  public howToSort: string = 'descending';
   handleShowHighScores(){
     this.showHighScores=!this.showHighScores;
     this.showMyScores=false;
