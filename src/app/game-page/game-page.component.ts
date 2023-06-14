@@ -49,7 +49,6 @@ export class GamePageComponent {
     private _playerData: PlayerDataService,
     private _highScores: GamesServerService,
   ) {
-    this.loadScoresData();
     this.saveSelectedPalette()
   }
   ngOnInit(): void {
@@ -57,6 +56,7 @@ export class GamePageComponent {
     this.playerInfo = this._playerData.readData();
     this.CurrentGameData.playerName = this.playerInfo.name; 
     this.setScoresGetInterval();
+    this.loadScoresData();
   }
   ngOnDestroy() {
     this._IntervalScores.unsubscribe();

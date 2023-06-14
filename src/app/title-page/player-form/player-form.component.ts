@@ -6,6 +6,7 @@ import { GamesServerService } from 'src/app/services/games-server/games-server.s
 import { FormBuilder, Validators, } from '@angular/forms';
 
 
+
 @Component({
   selector: 'app-player-form',
   templateUrl: './player-form.component.html',
@@ -60,6 +61,7 @@ export class PlayerFormComponent {
           console.log('auth failed', data);
           this.isTokenValid = false;
           localStorage.setItem('isInfoSubmitted',`false`)
+          return alert('Your token is invalid')
         }
       },
       error: (err) => {console.log('authentication failed', err);
@@ -89,6 +91,7 @@ export class PlayerFormComponent {
     }
     else{
       this.showErrorMessages()
+      console.log('gib errors')
     }
   }
 }
