@@ -15,10 +15,12 @@
     "@angular/compiler": "^16.1.0",
     "@angular/core": "^16.1.0",
     "@angular/forms": "^16.1.0",
+    "@angular/material": "^16.1.0",
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
-    "bootstrap": "^5.3.0-alpha1",
+    "@ng-bootstrap/ng-bootstrap": "^15.0.1",
+    "bootstrap": "^5.3.0",
     "bootstrap-icons": "^1.10.3",
     "ngx-snake": "^1.0.6",
     "rxjs": "~7.8.0",
@@ -26,7 +28,7 @@
     "zone.js": "~0.13.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^15.1.1",
+    "@angular-devkit/build-angular": "^16.1.0",
     "@angular/cli": "~15.1.1",
     "@angular/compiler-cli": "^16.1.0",
     "@types/jasmine": "~4.3.0",

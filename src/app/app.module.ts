@@ -16,6 +16,10 @@ import {HttpClientModule} from "@angular/common/http";
 import { HighScoresComponent } from './game-page/high-scores/high-scores.component';
 import { OnlyXBestPipe } from './pipes/OnlyXbest/only-xbest.pipe';
 import { PlayerDataGuardService } from './services/route-guard/player-data-guard.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
 
 @NgModule({
   declarations: [
@@ -30,18 +34,22 @@ import { PlayerDataGuardService } from './services/route-guard/player-data-guard
     GameStatusComponent,
     HighScoresComponent,
     OnlyXBestPipe,
-    
+    PageNotFoundComponent,   
   ],
   imports: [
     BrowserModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule,
     NgxSnakeModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
       {path:'TitlePage',component: TitlePageComponent},
       {path:'GamePage/:palette',component: GamePageComponent,canActivate: [PlayerDataGuardService]},
+      {path:'',redirectTo: '/TitlePage', pathMatch: 'full' },
       // {path:'GamePage/:palette',component: GamePageComponent},
-      {path:'**',redirectTo: 'TitlePage'}
+      // {path:'**',redirectTo: 'TitlePage'}
+      {path:'**',component: PageNotFoundComponent}
     ]),
     HttpClientModule
   ],

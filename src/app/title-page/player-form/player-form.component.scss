@@ -10,10 +10,15 @@ label{
     line-height:30px;
     padding:0px 15px;
     text-align: center;
-    // display:block;
     width:100%;
 
 }
+.custom-error-snackbar {
+    background-color: red !important;
+    color: white;
+    font-weight: bold;
+    width: 800px;
+  }
 button {
     margin:0 auto;
     display:block;
@@ -31,7 +36,3 @@ button {
     display:block;
     margin-bottom: 2%;
 }
-// .playerFormContainer{
-//     display:flex;
-//     place-items: center;
-// }

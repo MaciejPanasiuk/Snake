@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { PlayerDataService } from 'src/app/services/player-data/player-data.service';
 import { GamesServerService } from 'src/app/services/games-server/games-server.service';
 import { FormBuilder, Validators, } from '@angular/forms';
-// import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap'
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-player-form',
@@ -18,6 +17,7 @@ export class PlayerFormComponent {
     public _playerData: PlayerDataService,
     private _highScores: GamesServerService,
     public _fb: FormBuilder,
+    private snackBar: MatSnackBar
   ) {}
   ngOnInit(): void {
       this._playerData.clearPlayerData();
@@ -60,8 +60,13 @@ export class PlayerFormComponent {
           this.showErrorMessages();
           console.log('auth failed', data);
           this.isTokenValid = false;
-          localStorage.setItem('isInfoSubmitted',`false`)
-          return alert('Your token is invalid')
+          localStorage.setItem('isInfoSubmitted',`false`);
+          this.snackBar.open('Your token is invalid','Close',{
+            duration:5000,
+            verticalPosition:'top',
+            horizontalPosition:'center',
+            panelClass:'custom-error-snackbar',
+          });
         }
       },
       error: (err) => {console.log('authentication failed', err);
