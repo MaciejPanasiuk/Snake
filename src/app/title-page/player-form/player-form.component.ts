@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { PlayerDataService } from 'src/app/services/player-data/player-data.service';
 import { GamesServerService } from 'src/app/services/games-server/games-server.service';
 import { FormBuilder, Validators, } from '@angular/forms';
-
+// import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap'
 
 
 @Component({
